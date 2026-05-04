@@ -1,182 +1,267 @@
-# ⚓ dockyard2sail-ts 🚢
+# 🌑 MX Security What-If Simulator
 
-_Un boilerplate moderno y listo para producción con TypeScript, Docker y DevContainers._
+_Un simulador interactivo en dark mode para analizar escenarios hipotéticos de homicidios en México (2000-2026)._
 
 ---
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
-![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-lightgrey?logo=githubactions&logoColor=white)
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-5-purple?logo=vite)
+![Tailwind](https://img.shields.io/badge/Tailwind-3-cyan?logo=tailwindcss)
+![Dark Mode](https://img.shields.io/badge/Theme-Dark_Mode-black)
 ![Licencia](https://img.shields.io/badge/license-MIT-green)
-![Producción Lista](https://img.shields.io/badge/Listo_para-Navegar_🌊-blue)
 
 ---
 
-## 🌐 Documentación
+## 🌐 Demo
 
-- 🇪🇸 Español (principal)
-- 🇬🇧 [English README](./docs/README_EN.md)
+![MX Security What-If Simulator Screenshot](./docs/screenshot-dark.png)
 
----
-
-## 🌊 Características
-
-- **TypeScript**: Soporte completo con chequeo estricto de tipos
-- **pnpm**: Gestor de paquetes rápido y eficiente con soporte para workspaces
-- **Vite**: Herramienta de construcción y servidor de desarrollo ultrarrápido
-- **Vitest**: Framework de pruebas unitarias veloz
-- **Docker**: Builds multi-stage para producción y contenedores de desarrollo
-- **DevContainers**: Entorno completo de desarrollo con VS Code
-- **Husky**: Hooks de Git para asegurar calidad de código
-- **CI/CD Listo**: Scripts de validación e integración con GitHub Actions
+_Dualidad visual: Realidad histórica vs Simulación What-If_
 
 ---
 
-## 🛳️ Estructura del Proyecto
+## ✨ Características
+
+- **🌑 Dark Mode Nativo**: Interfaz oscura optimizada (#121212, #1E1E1E)
+- **📊 Dualidad Visual**: Dos gráficas lado a lado (Real vs What-If)
+- **🎰 Sistema de Slots**: 4 slots configurables para reordenar presidentes
+- **🔢 Motor de Cascada**: Algoritmo matemático $V_{final} = V_{anterior} \times (1 + TC)$
+- **📈 Datos Oficiales**: INEGI, SESNSP, World Bank
+- **⚡ Performance**: Renderizado <1s, interacciones <100ms
+- **📱 Responsive**: Mobile-first design
+
+---
+
+## 🎯 ¿Qué hace?
+
+El simulador permite responder preguntas "What-If" sobre homicidios en México:
+
+- ¿Qué habría pasado si AMLO hubiera gobernado en lugar de Calderón?
+- ¿Cómo se verían los números con 4 sexenios de Peña Nieto?
+- ¿Qué efecto tendría repetir el comportamiento de Fox 5 veces?
+
+---
+
+## 🧮 Algoritmo de Cascada
+
+El motor usa una **lógica de cascada acumulativa**:
 
 ```
-├── .husky/                 # Hooks de Git
-├── scripts/                # Scripts de construcción y validación
-├── src/                    # Código fuente
-│   ├── main.ts            # Punto de entrada principal
-│   └── test/              # Archivos de prueba
-├── docker-compose.yml      # Entorno de desarrollo
-├── Dockerfile              # Build de producción
-├── Dockerfile.dev          # Entorno de desarrollo
-├── package.json            # Dependencias y scripts
-├── tsconfig.json           # Configuración de TypeScript
-├── vite.config.ts          # Configuración de Vite
-└── vitest.config.ts        # Configuración de pruebas
+Slot 0 (Fijo): Fox → 10,452 homicidios
+
+Slot 1: [Presidente seleccionado]
+  Valor = 10,452 × Multiplicador₁
+
+Slot 2: [Presidente seleccionado]
+  Valor = Valor₁ × Multiplicador₂
+
+Slot 3: [Presidente seleccionado]
+  Valor = Valor₂ × Multiplicador₃
+
+Slot 4: [Presidente seleccionado]
+  Valor = Valor₃ × Multiplicador₄
 ```
+
+### Tabla de Multiplicadores
+
+| Presidente       | Tasa de Crecimiento | Multiplicador | Cierre Oficial |
+|------------------|---------------------|---------------|----------------|
+| V. Fox           | +1.6%               | 1.016         | 10,452         |
+| F. Calderón      | +192.8%             | 2.928         | 25,967         |
+| E. Peña Nieto    | +59.0%              | 1.59          | 36,685         |
+| AMLO             | -22.0%              | 0.78          | 29,741         |
+| C. Sheinbaum*    | -31.0%              | 0.69          | 20,536         |
+
+_*Datos proyectados con base en tendencia observada hasta mayo 2026_
 
 ---
 
-## 🧭 Primeros Pasos
+## 🚀 Inicio Rápido
 
-Al deployar la app deberías ver:
+### Requisitos Previos
 
-![image](./docs/pnpm-dev-example.png)
+- [Node.js](https://nodejs.org/) 18+ o [Bun](https://bun.sh/)
+- [pnpm](https://pnpm.io/) (recomendado) o npm
 
-### Requisitos previos
-
-- [Docker](https://www.docker.com/) y Docker Compose
-- [VS Code](https://code.visualstudio.com/) (recomendado)
-- [Extensión Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-
-### Opción 1: Usando DevContainers (Recomendado)
+### Instalación
 
 ```bash
-pnpm dev
-```
+# Clonar repositorio
+git clone https://github.com/username/mx-security-dark-sim.git
+cd mx-security-dark-sim
 
-### Opción 2: Usando Docker Compose
-
-```bash
-docker-compose up -d
-docker-compose exec phaser-app bash
+# Instalar dependencias
 pnpm install
+
+# Iniciar servidor de desarrollo
 pnpm dev
 ```
 
-### Opción 3: Desarrollo Local
-
-```bash
-npm install -g pnpm
-pnpm install
-pnpm dev
-```
+La aplicación estará disponible en `http://localhost:5173/`
 
 ---
 
 ## ⚡ Scripts Disponibles
 
 | Script               | Descripción                                   |
-| -------------------- | --------------------------------------------- |
-| `pnpm dev`           | Inicia el servidor de desarrollo              |
+|----------------------|-----------------------------------------------|
+| `pnpm dev`           | Inicia el servidor de desarrollo (Vite)       |
 | `pnpm build`         | Construye para producción                     |
 | `pnpm typecheck`     | Revisa los tipos de TypeScript                |
 | `pnpm test`          | Ejecuta pruebas en modo watch                 |
 | `pnpm test:run`      | Ejecuta pruebas una sola vez                  |
-| `pnpm test:ui`       | Ejecuta pruebas con interfaz gráfica          |
 | `pnpm test:coverage` | Ejecuta pruebas con cobertura                 |
 | `pnpm preview`       | Previsualiza el build de producción           |
-| `pnpm validate`      | Validación completa (tipos + pruebas + build) |
 
 ---
 
-## 🐳 Comandos Docker
+## 📁 Estructura del Proyecto
 
-### Desarrollo
-
-```bash
-docker-compose up -d
-docker-compose logs -f
-docker-compose down
+```
+src/
+├── components/
+│   ├── DualChart/              # Componentes de gráficas
+│   │   ├── DualChart.tsx       # Contenedor principal
+│   │   ├── RealChart.tsx       # Gráfica de realidad histórica
+│   │   └── WhatIfChart.tsx     # Gráfica de simulación
+│   ├── SimulationControls/     # Controles de simulación
+│   │   ├── SimulationControls.tsx
+│   │   └── PresidentSlot.tsx   # Selector individual
+│   ├── MetricsPanel/           # Panel de métricas
+│   │   └── MetricsPanel.tsx
+│   └── DataSourceFooter/       # Footer con fuentes
+│       └── DataSourceFooter.tsx
+├── data/
+│   ├── presidentes.data.ts     # Datos de presidentes
+│   ├── historico.data.ts       # Datos históricos reales
+│   └── types.ts                # TypeScript interfaces
+├── engine/
+│   ├── SimulationEngine.ts     # Motor de simulación
+│   └── SimulationEngine.test.ts
+├── store/
+│   └── useSimulationStore.ts   # Zustand store (estado global)
+├── hooks/
+│   └── useChartColors.ts       # Hook de colores dark mode
+└── App.tsx                      # Componente principal
 ```
 
-### Producción
+---
+
+## 🧪 Testing
 
 ```bash
-docker build -t mi-app:latest .
-docker run -p 8080:8080 mi-app:latest
+# Tests unitarios
+pnpm test:run
+
+# Tests con coverage
+pnpm test:coverage
+
+# Tests en modo watch
+pnpm test
 ```
 
----
-
-## 🧭 Archivos de Configuración
-
-- **TypeScript (tsconfig.json)**: Chequeo estricto, ES2022, alias de paths, source maps
-- **Vite (vite.config.ts)**: HMR, optimización para producción, alias de paths
-- **Testing (vitest.config.ts)**: Entorno JSDOM, reportes de cobertura, modo UI
-- **Package Manager (.npmrc, .pnpmrc)**: Optimizado para CI/CD
+**Coverage Targets**:
+- SimulationEngine: >95%
+- Componentes: >80%
 
 ---
 
-## ⚓ Despliegue
+## 🎨 Diseño y UX
+
+### Paleta de Colores
+
+- **Fondo**: `#121212`
+- **Cards**: `#1E1E1E`
+- **Texto**: `#E0E0E0`
+- **Rojo (Crecimiento)**: `#EF4444`
+- **Verde (Reducción)**: `#10B981`
+- **Acento**: `#3B82F6`
+
+### Filosofía de Diseño
+
+- **Dark Mode Nativo**: No hay opción de light mode
+- **Dualidad Visual**: Real vs What-If siempre visible
+- **Interactividad Rápida**: Cambios de slot en <100ms
+- **Transparencia**: Fuentes oficiales visibles en footer
+
+---
+
+## 📊 Fuentes de Datos
+
+Los datos provienen de fuentes oficiales:
+
+- **INEGI**: Instituto Nacional de Estadística y Geografía
+- **SESNSP**: Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública
+- **World Bank**: Banco Mundial
+- **Estudios Académicos**: Referencias verificadas en Wikipedia
+
+> **Nota sobre Proyecciones**: Los datos de la administración de Claudia Sheinbaum (2024-2030) están **proyectados** con base en la tendencia de reducción del -31% observada hasta mayo de 2026. Estos valores son estimaciones sujetas a cambios.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: React 18 + TypeScript 5
+- **Build Tool**: Vite 5
+- **State Management**: Zustand 4
+- **Gráficas**: Recharts 2
+- **Styling**: Tailwind CSS 3
+- **Testing**: Vitest + React Testing Library
+- **Package Manager**: pnpm
+
+---
+
+## 🚢 Deployment
+
+### Railway (Recomendado)
 
 ```bash
+# Build
 pnpm build
-docker build -t mi-app:latest .
-docker push mi-registro/mi-app:latest
+
+# El contenido de dist/ es servido como sitio estático
 ```
 
----
+Railway detecta automáticamente el proyecto Vite y lo despliega.
 
-## 🔍 Calidad de Código
+### Otros Providers
 
-Incluye herramientas para asegurar la calidad:
-
-- **Husky** + **lint-staged**
-- **TypeScript estricto**
-- **Vitest** para pruebas completas
-
----
-
-## 📜 Buenas Prácticas
-
-1. Mantener dependencias actualizadas
-2. Escribir pruebas con buena cobertura
-3. Usar TypeScript en modo estricto
-4. Optimizar capas en Docker
-5. Usar variables de entorno con Vite
-6. Aprovechar los hooks de Git configurados
+Compatible con: Vercel, Netlify, GitHub Pages, Cloudflare Pages
 
 ---
 
 ## 🤝 Contribuir
 
-1. Haz un fork del repositorio
-2. Crea una rama de feature
+1. Fork el repositorio
+2. Crea una rama de feature (`git checkout -b feature/amazing-feature`)
 3. Realiza tus cambios
-4. Ejecuta `pnpm validate`
-5. Envía un Pull Request
+4. Ejecuta tests (`pnpm test:run`)
+5. Verifica types (`pnpm typecheck`)
+6. Commit (`git commit -m 'Add amazing feature'`)
+7. Push (`git push origin feature/amazing-feature`)
+8. Abre un Pull Request
 
 ---
 
-## 📄 Licencia
+## 📜 Licencia
 
-Este proyecto está disponible bajo la licencia MIT.
+Este proyecto está disponible bajo la licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
 
 ---
 
-Hecho con ❤️ en el ⚓ **Dockyard** → listo para 🚢 **Navegar**
+## 🙏 Agradecimientos
+
+- **INEGI, SESNSP, World Bank**: Por los datos oficiales
+- **Comunidad Open Source**: Por las herramientas increíbles
+
+---
+
+## 📞 Contacto
+
+- **Issues**: [GitHub Issues](https://github.com/username/mx-security-dark-sim/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/username/mx-security-dark-sim/discussions)
+
+---
+
+**Hecho con ❤️ y datos oficiales | Dark Mode 🌑**

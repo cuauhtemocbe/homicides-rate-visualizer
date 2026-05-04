@@ -1,10 +1,15 @@
 ---
 title: WebApp de Análisis de Crecimiento de Homicidios (México 2000-2026)
-status: approved
+status: deprecated
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-05-04
+deprecated_date: 2026-05-04
+replaced_by: mx-security-what-if-simulator.md
 issue: null
 ---
+
+> **⚠️ DEPRECATED**: Esta especificación ha sido reemplazada por `mx-security-what-if-simulator.md` (v2.0).  
+> La nueva versión incluye diseño dark mode, dualidad visual (Real vs What-If), y sistema de slots de simulación.
 
 # WebApp de Análisis de Crecimiento de Homicidios (México 2000-2026)
 

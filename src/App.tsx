@@ -1,37 +1,52 @@
-import { TimeSeriesChart } from './components/TimeSeriesChart';
-import { SimulationPanel } from './components/SimulationPanel';
+/**
+ * MX Security What-If Simulator
+ * Version 2.0 - Dark Mode Edition
+ */
+
+import { useEffect } from 'react';
+import { useSimulationStore } from './store/useSimulationStore';
+import { DualChart } from './components/DualChart/DualChart';
+import { SimulationControls } from './components/SimulationControls/SimulationControls';
+import { MetricsPanel } from './components/MetricsPanel/MetricsPanel';
+import { DataSourceFooter } from './components/DataSourceFooter/DataSourceFooter';
 import './index.css';
 
 function App() {
+  const inicializar = useSimulationStore((state) => state.inicializar);
+
+  // Aplicar dark mode y inicializar simulación
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    inicializar();
+  }, [inicializar]);
+
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-dark-bg">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        {/* Header */}
         <header className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Análisis de Crecimiento de Homicidios en México
+          <h1 className="text-4xl font-bold text-dark-text mb-2">
+            MX Security What-If Simulator
           </h1>
-          <p className="text-gray-600 text-sm md:text-base">
-            Visualización interactiva de tasas de homicidios (2000-2026)
+          <p className="text-dark-text-secondary">
+            Analiza escenarios hipotéticos de homicidios en México (2000-2026)
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <TimeSeriesChart />
-          </div>
-          <div>
-            <SimulationPanel />
-          </div>
-        </div>
+        {/* Main Content */}
+        <main className="space-y-6">
+          {/* Dualidad Visual: Real vs What-If */}
+          <DualChart />
 
-        <footer className="text-center text-sm text-gray-500 mt-8">
-          <p>
-            Fuentes: SESNSP, INEGI, CONAPO | Datos por cada 100,000 habitantes
-          </p>
-          <p className="mt-1 text-xs italic">
-            Nota: Actualmente usando datos de ejemplo. Reemplazar con datos oficiales.
-          </p>
-        </footer>
+          {/* Controles de Simulación */}
+          <SimulationControls />
+
+          {/* Panel de Métricas */}
+          <MetricsPanel />
+
+          {/* Footer con Fuentes */}
+          <DataSourceFooter />
+        </main>
       </div>
     </div>
   );

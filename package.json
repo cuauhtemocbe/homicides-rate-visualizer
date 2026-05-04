@@ -1,10 +1,13 @@
 {
-  "name": "typescript-pnpm-docker-boilerplate",
-  "version": "1.0.0",
-  "description": "A TypeScript boilerplate with pnpm, Docker, and DevContainers support",
+  "name": "mx-security-dark-sim",
+  "version": "2.0.0",
+  "description": "Interactive dark-mode simulator for analyzing homicide trends in Mexico with what-if scenarios",
+  "keywords": ["mexico", "data-science", "simulation", "dark-mode", "typescript", "react", "vite", "recharts"],
+  "author": "Kuautli <cuauhtemocbe@gmail.com>",
+  "license": "MIT",
   "private": true,
   "type": "module",
-  "main": "dist/main.js",
+  "main": "dist/index.html",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
