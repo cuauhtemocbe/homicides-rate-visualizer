@@ -67,44 +67,41 @@ export const SimulationControls = () => {
         />
       </div>
 
-      {/* Mobile: vertical stack with dividers */}
-      <div className="md:hidden space-y-4 mb-6">
+      {/* Mobile: horizontal two-column layout */}
+      <div className="md:hidden grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 mb-6 items-center">
         <PresidentSlot
           slotNumber={0}
           currentPresident={slotsActuales.slot0}
           disabled={true}
+          layout="horizontal"
         />
-
-        <div className="border-t border-dark-border my-2" />
 
         <PresidentSlot
           slotNumber={1}
           currentPresident={slotsActuales.slot1}
           onChange={handleSlotChange(1)}
+          layout="horizontal"
         />
-
-        <div className="border-t border-dark-border my-2" />
 
         <PresidentSlot
           slotNumber={2}
           currentPresident={slotsActuales.slot2}
           onChange={handleSlotChange(2)}
+          layout="horizontal"
         />
-
-        <div className="border-t border-dark-border my-2" />
 
         <PresidentSlot
           slotNumber={3}
           currentPresident={slotsActuales.slot3}
           onChange={handleSlotChange(3)}
+          layout="horizontal"
         />
-
-        <div className="border-t border-dark-border my-2" />
 
         <PresidentSlot
           slotNumber={4}
           currentPresident={slotsActuales.slot4}
           onChange={handleSlotChange(4)}
+          layout="horizontal"
         />
       </div>
 
