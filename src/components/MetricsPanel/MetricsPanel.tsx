@@ -4,6 +4,7 @@
 
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { VALOR_REAL_FINAL } from '../../data/historico.data';
+import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 
 export const MetricsPanel = () => {
   const { resultadoSimulacion } = useSimulationStore();
@@ -14,14 +15,22 @@ export const MetricsPanel = () => {
 
   const { valorFinal, diferencia, diferenciaPorcentual } = resultadoSimulacion;
 
-  const diferenciaColor = diferencia >= 0 ? 'text-growth-positive' : 'text-growth-negative';
+  // diferencia >= 0 means MORE homicides in What-If (bad) = danger
+  // diferencia < 0 means LESS homicides in What-If (good) = success
+  const diferenciaColor = diferencia >= 0 ? 'text-danger' : 'text-success';
   const diferenciaIcon = diferencia >= 0 ? '↑' : '↓';
 
   return (
     <div className="bg-dark-card rounded-lg p-6">
-      <h3 className="text-lg font-bold text-dark-text mb-6 text-center">
-        Comparación de Resultados
-      </h3>
+      <div className="flex items-center justify-center gap-2 mb-6">
+        <h3 className="text-lg font-bold text-dark-text">
+          Comparación de Resultados
+        </h3>
+        <InfoTooltip
+          content="Compara el resultado final de tu simulación con la realidad histórica. Verde = menos homicidios (mejor), Rojo = más homicidios (peor)."
+          position="bottom"
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Realidad */}

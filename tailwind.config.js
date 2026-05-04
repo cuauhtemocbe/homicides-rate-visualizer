@@ -15,10 +15,9 @@ export default {
           'text-secondary': 'var(--color-text-secondary)',
           border: 'var(--color-border)'
         },
-        growth: {
-          positive: '#EF4444',
-          negative: '#10B981'
-        },
+        // Semantic colors for homicide context
+        danger: '#EF4444',    // Red: increase in homicides (bad)
+        success: '#10B981',   // Green: decrease in homicides (good)
         accent: '#3B82F6'
       }
     }
