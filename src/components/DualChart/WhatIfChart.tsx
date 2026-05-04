@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { useChartColors } from '../../hooks/useChartColors';
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { PRESIDENTES } from '../../data/presidentes.data';
+import { formatNumberCompact } from '../../utils/formatNumber';
 
 export const WhatIfChart = () => {
   const colors = useChartColors();
@@ -56,6 +57,7 @@ export const WhatIfChart = () => {
             stroke={colors.textColor}
             style={{ fontSize: '12px' }}
             label={{ value: 'Homicidios', angle: -90, position: 'insideLeft', fill: colors.textColor }}
+            tickFormatter={formatNumberCompact}
           />
           <Tooltip
             contentStyle={{
@@ -65,7 +67,7 @@ export const WhatIfChart = () => {
               color: colors.tooltipText
             }}
             formatter={(value) =>
-              typeof value === 'number' ? [value.toLocaleString('es-MX'), 'Homicidios'] : ['', '']
+              typeof value === 'number' ? [formatNumberCompact(value), 'Homicidios'] : ['', '']
             }
           />
           <Bar dataKey="homicidios">
@@ -78,7 +80,7 @@ export const WhatIfChart = () => {
       <div className="mt-4 text-center">
         <p className="text-dark-text-secondary text-sm">
           Valor Final: <span className="text-dark-text font-bold text-lg">
-            {resultadoSimulacion.valorFinal.toLocaleString('es-MX')}
+            {formatNumberCompact(resultadoSimulacion.valorFinal)}
           </span>
         </p>
       </div>

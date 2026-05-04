@@ -9,11 +9,11 @@ export default {
     extend: {
       colors: {
         dark: {
-          bg: '#121212',
-          card: '#1E1E1E',
-          text: '#E0E0E0',
-          'text-secondary': '#B0B0B0',
-          border: '#2A2A2A'
+          bg: 'var(--color-bg)',
+          card: 'var(--color-card)',
+          text: 'var(--color-text)',
+          'text-secondary': 'var(--color-text-secondary)',
+          border: 'var(--color-border)'
         },
         growth: {
           positive: '#EF4444',

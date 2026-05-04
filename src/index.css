@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light Theme (default) */
+:root {
+  --color-bg: #F5F5F5;
+  --color-card: #FFFFFF;
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+}
+
+/* Dark Theme */
+.dark {
+  --color-bg: #121212;
+  --color-card: #1E1E1E;
+  --color-text: #E0E0E0;
+  --color-text-secondary: #B0B0B0;
+  --color-border: #2A2A2A;
+}

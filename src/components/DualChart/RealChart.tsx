@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { useChartColors } from '../../hooks/useChartColors';
 import { HISTORICO_REAL } from '../../data/historico.data';
 import { PRESIDENTES } from '../../data/presidentes.data';
+import { formatNumberCompact } from '../../utils/formatNumber';
 
 export const RealChart = () => {
   const colors = useChartColors();
@@ -33,6 +34,7 @@ export const RealChart = () => {
             stroke={colors.textColor}
             style={{ fontSize: '12px' }}
             label={{ value: 'Homicidios', angle: -90, position: 'insideLeft', fill: colors.textColor }}
+            tickFormatter={formatNumberCompact}
           />
           <Tooltip
             contentStyle={{
@@ -42,7 +44,7 @@ export const RealChart = () => {
               color: colors.tooltipText
             }}
             formatter={(value) =>
-              typeof value === 'number' ? [value.toLocaleString('es-MX'), 'Homicidios'] : ['', '']
+              typeof value === 'number' ? [formatNumberCompact(value), 'Homicidios'] : ['', '']
             }
           />
           <Bar dataKey="homicidios" fill={colors.positiveBar}>
@@ -55,7 +57,7 @@ export const RealChart = () => {
       <div className="mt-4 text-center">
         <p className="text-dark-text-secondary text-sm">
           Valor Final: <span className="text-dark-text font-bold text-lg">
-            {HISTORICO_REAL[4].homicidios.toLocaleString('es-MX')}
+            {formatNumberCompact(HISTORICO_REAL[4].homicidios)}
           </span>
         </p>
       </div>

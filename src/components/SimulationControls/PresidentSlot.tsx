@@ -22,7 +22,7 @@ export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange
   return (
     <div className="flex flex-col items-center gap-2">
       <label className="text-dark-text-secondary text-xs font-semibold">
-        Slot {slotNumber}
+        Sexenio {slotNumber + 1}
       </label>
       <select
         value={currentPresident}
