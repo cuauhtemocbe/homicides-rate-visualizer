@@ -26,23 +26,21 @@ export const useHomicideStore = create<HomicideStore>((set, get) => ({
   activarSimulacion: (params) => {
     const { presidenteComportamiento, periodoObjetivo } = params;
 
-    // Encontrar registros del presidente cuyo comportamiento queremos aplicar
+    // Encontrar el sexenio fuente (de donde tomamos la tasa de crecimiento)
     const sexenioFuente = SEXENIOS.find((s) => s.presidente === presidenteComportamiento);
     if (!sexenioFuente) return;
 
-    const registrosFuente = get().registrosHistoricos.filter(
-      (r) => r.fecha >= sexenioFuente.inicio && r.fecha <= sexenioFuente.fin
-    );
-
-    // Calcular tasa de crecimiento mensual del presidente fuente
-    const tasaCrecimientoMensual = calcularPendienteDeRegistros(registrosFuente);
+    // Usar la pendiente de crecimiento precalculada del sexenio
+    // Convertir de porcentaje total a porcentaje mensual
+    const mesesEnSexenio = 72; // 6 años = 72 meses
+    const tasaCrecimientoMensual = sexenioFuente.pendienteCrecimiento / mesesEnSexenio;
 
     // Obtener registros del periodo objetivo
     const registrosObjetivo = get().registrosHistoricos.filter(
       (r) => r.fecha >= periodoObjetivo.inicio && r.fecha <= periodoObjetivo.fin
     );
 
-    // Generar proyección
+    // Generar proyección aplicando la tasa de crecimiento
     const proyeccion = generarProyeccion(
       registrosObjetivo,
       tasaCrecimientoMensual,
