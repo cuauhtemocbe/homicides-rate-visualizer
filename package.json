@@ -18,15 +18,26 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "vite": "^5.4.21"
+    "date-fns": "4.1.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "recharts": "3.8.1",
+    "vite": "^5.4.21",
+    "zustand": "5.0.12"
   },
   "devDependencies": {
     "@types/node": "^22.18.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.2.0",
     "@vitest/coverage-v8": "^2.0.5",
     "@vitest/ui": "^2.0.5",
+    "autoprefixer": "10.5.0",
     "husky": "^9.1.7",
     "jsdom": "^25.0.0",
     "lint-staged": "^16.1.6",
+    "postcss": "8.5.13",
+    "tailwindcss": "4.2.4",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   },
