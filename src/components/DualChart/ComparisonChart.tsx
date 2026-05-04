@@ -108,12 +108,18 @@ export const ComparisonChart = () => {
               backgroundColor: colors.tooltipBg,
               border: `1px solid ${colors.tooltipBorder}`,
               borderRadius: '4px',
-              color: colors.tooltipText
+              color: colors.tooltipText,
+              maxWidth: isMobile ? '140px' : '200px',
+              fontSize: isMobile ? '11px' : '14px',
+              padding: isMobile ? '6px 8px' : '8px 12px'
             }}
             formatter={(value, name) => {
-              const label = name === 'real' ? 'Realidad' : 'What-If';
+              const label = name === 'real' ? 'Real' : 'What-If';
               return [typeof value === 'number' ? formatNumberCompact(value) : '', label];
             }}
+            offset={10}
+            allowEscapeViewBox={{ x: false, y: false }}
+            position={{ y: 0 }}
           />
           <Line
             type="monotone"
