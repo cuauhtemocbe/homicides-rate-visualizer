@@ -24,7 +24,7 @@ _Dualidad visual: Realidad histórica vs Simulación What-If_
 ## ✨ Características
 
 - **🌑 Dark Mode Nativo**: Interfaz oscura optimizada (#121212, #1E1E1E)
-- **📊 Dualidad Visual**: Dos gráficas lado a lado (Real vs What-If)
+- **📊 Comparación Visual**: Gráfico de líneas comparando Real vs What-If
 - **🎰 Sistema de Slots**: 4 slots configurables para reordenar presidentes
 - **🔢 Motor de Cascada**: Algoritmo matemático $V_{final} = V_{anterior} \times (1 + TC)$
 - **📈 Datos Oficiales**: INEGI, SESNSP, World Bank
@@ -123,8 +123,7 @@ src/
 ├── components/
 │   ├── DualChart/              # Componentes de gráficas
 │   │   ├── DualChart.tsx       # Contenedor principal
-│   │   ├── RealChart.tsx       # Gráfica de realidad histórica
-│   │   └── WhatIfChart.tsx     # Gráfica de simulación
+│   │   └── ComparisonChart.tsx # Gráfica de comparación (Real vs What-If)
 │   ├── SimulationControls/     # Controles de simulación
 │   │   ├── SimulationControls.tsx
 │   │   └── PresidentSlot.tsx   # Selector individual
@@ -180,8 +179,8 @@ pnpm test
 
 ### Filosofía de Diseño
 
-- **Dark Mode Nativo**: No hay opción de light mode
-- **Dualidad Visual**: Real vs What-If siempre visible
+- **Dark/Light Mode**: Toggle de tema oscuro y claro
+- **Comparación Visual**: Real vs What-If en un solo gráfico de líneas
 - **Interactividad Rápida**: Cambios de slot en <100ms
 - **Transparencia**: Fuentes oficiales visibles en footer
 
