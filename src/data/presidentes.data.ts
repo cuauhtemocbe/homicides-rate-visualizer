@@ -22,8 +22,8 @@ export const PRESIDENTES: Record<PresidenteId, Presidente> = {
     id: 'calderon',
     nombre: 'Felipe Calderón Hinojosa',
     nombreCorto: 'Calderón',
-    tasaCrecimiento: 1.928,      // 192.8%
-    multiplicador: 2.928,
+    tasaCrecimiento: 1.484,      // 148.4% (25967/10452 - 1)
+    multiplicador: 2.484,        // 25967 / 10452
     cierreOficial: 25967,
     periodo: '2006-2012',
     esProyeccion: false
@@ -32,8 +32,8 @@ export const PRESIDENTES: Record<PresidenteId, Presidente> = {
     id: 'pena',
     nombre: 'Enrique Peña Nieto',
     nombreCorto: 'Peña Nieto',
-    tasaCrecimiento: 0.590,      // 59.0%
-    multiplicador: 1.59,
+    tasaCrecimiento: 0.413,      // 41.3% (36685/25967 - 1)
+    multiplicador: 1.413,        // 36685 / 25967
     cierreOficial: 36685,
     periodo: '2012-2018',
     esProyeccion: false
@@ -42,8 +42,8 @@ export const PRESIDENTES: Record<PresidenteId, Presidente> = {
     id: 'amlo',
     nombre: 'Andrés Manuel López Obrador',
     nombreCorto: 'AMLO',
-    tasaCrecimiento: -0.220,     // -22.0%
-    multiplicador: 0.78,
+    tasaCrecimiento: -0.189,     // -18.9% (29741/36685 - 1)
+    multiplicador: 0.811,        // 29741 / 36685
     cierreOficial: 29741,        // Dato 2023
     periodo: '2018-2024',
     esProyeccion: false
@@ -52,8 +52,8 @@ export const PRESIDENTES: Record<PresidenteId, Presidente> = {
     id: 'sheinbaum',
     nombre: 'Claudia Sheinbaum Pardo',
     nombreCorto: 'Sheinbaum',
-    tasaCrecimiento: -0.310,     // -31.0%
-    multiplicador: 0.69,
+    tasaCrecimiento: -0.310,     // -31.0% (20536/29741 - 1)
+    multiplicador: 0.690,        // 20536 / 29741
     cierreOficial: 20536,        // Proyectado (calculado)
     periodo: '2024-2030',
     esProyeccion: true

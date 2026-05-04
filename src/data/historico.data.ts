@@ -18,29 +18,29 @@ export const HISTORICO_REAL: RegistroHistorico[] = [
   {
     presidente: 'calderon',
     homicidios: 25967,
-    tasaCrecimiento: 192.8,
-    multiplicador: 2.928,
+    tasaCrecimiento: 148.4,   // Corregido: 25967/10452 - 1
+    multiplicador: 2.484,     // Corregido: 25967 / 10452
     color: 'red'              // Fuerte crecimiento (guerra contra narco)
   },
   {
     presidente: 'pena',
     homicidios: 36685,
-    tasaCrecimiento: 59.0,
-    multiplicador: 1.59,
+    tasaCrecimiento: 41.3,    // Corregido: 36685/25967 - 1
+    multiplicador: 1.413,     // Corregido: 36685 / 25967
     color: 'red'              // Crecimiento continuo
   },
   {
     presidente: 'amlo',
     homicidios: 29741,
-    tasaCrecimiento: -22.0,
-    multiplicador: 0.78,
+    tasaCrecimiento: -18.9,   // Corregido: 29741/36685 - 1
+    multiplicador: 0.811,     // Corregido: 29741 / 36685
     color: 'green'            // Reducción
   },
   {
     presidente: 'sheinbaum',
     homicidios: 20536,        // Proyectado
     tasaCrecimiento: -31.0,
-    multiplicador: 0.69,
+    multiplicador: 0.690,     // Ya estaba correcto: 20536 / 29741
     color: 'green'            // Reducción proyectada
   }
 ];
