@@ -5,6 +5,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useChartColors } from '../../hooks/useChartColors';
+import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { HISTORICO_REAL } from '../../data/historico.data';
 import { PRESIDENTES } from '../../data/presidentes.data';
@@ -12,7 +13,8 @@ import { formatNumberCompact } from '../../utils/formatNumber';
 
 export const ComparisonChart = () => {
   const colors = useChartColors();
-  const { resultadoSimulacion, slotsActuales } = useSimulationStore();
+  const chartHeight = useResponsiveChartHeight();
+  const { resultadoSimulacion } = useSimulationStore();
 
   if (!resultadoSimulacion) {
     return (
@@ -35,7 +37,8 @@ export const ComparisonChart = () => {
       <h2 className="text-xl font-bold text-dark-text mb-4 text-center">
         Comparación: Real vs What-If
       </h2>
-      <ResponsiveContainer width="100%" height={400}>
+      <div role="img" aria-label="Gráfico de líneas comparando la realidad histórica con el escenario What-If a través de los 5 sexenios">
+        <ResponsiveContainer width="100%" height={chartHeight}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
           <XAxis
@@ -56,9 +59,9 @@ export const ComparisonChart = () => {
               borderRadius: '4px',
               color: colors.tooltipText
             }}
-            formatter={(value: number, name: string) => {
+            formatter={(value, name) => {
               const label = name === 'real' ? 'Realidad' : 'What-If';
-              return [formatNumberCompact(value), label];
+              return [typeof value === 'number' ? formatNumberCompact(value) : '', label];
             }}
           />
           <Legend
@@ -87,6 +90,7 @@ export const ComparisonChart = () => {
           />
         </LineChart>
       </ResponsiveContainer>
+      </div>
       <div className="mt-4 grid grid-cols-2 gap-4 text-center">
         <div>
           <p className="text-dark-text-secondary text-sm">

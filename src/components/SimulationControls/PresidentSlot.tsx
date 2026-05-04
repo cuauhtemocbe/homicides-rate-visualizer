@@ -21,10 +21,14 @@ export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <label className="text-dark-text-secondary text-xs font-semibold">
+      <label
+        htmlFor={`slot-select-${slotNumber}`}
+        className="text-dark-text-secondary text-xs font-semibold"
+      >
         Sexenio {slotNumber + 1}
       </label>
       <select
+        id={`slot-select-${slotNumber}`}
         value={currentPresident}
         onChange={handleChange}
         disabled={disabled}
@@ -35,6 +39,8 @@ export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange
           transition-all
         `}
         data-testid={`slot-${slotNumber}`}
+        aria-label={`Seleccionar presidente para el sexenio ${slotNumber + 1} (${2000 + slotNumber * 6}-${2006 + slotNumber * 6})`}
+        aria-describedby={disabled ? `slot-${slotNumber}-disabled` : undefined}
       >
         {ORDEN_HISTORICO.map((id) => (
           <option key={id} value={id}>
@@ -43,7 +49,12 @@ export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange
         ))}
       </select>
       {disabled && (
-        <span className="text-xs text-dark-text-secondary italic">(Fijo)</span>
+        <span
+          id={`slot-${slotNumber}-disabled`}
+          className="text-xs text-dark-text-secondary italic"
+        >
+          (Fijo - Punto de partida histórico)
+        </span>
       )}
     </div>
   );

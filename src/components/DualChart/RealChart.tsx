@@ -4,12 +4,14 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useChartColors } from '../../hooks/useChartColors';
+import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
 import { HISTORICO_REAL } from '../../data/historico.data';
 import { PRESIDENTES } from '../../data/presidentes.data';
 import { formatNumberCompact } from '../../utils/formatNumber';
 
 export const RealChart = () => {
   const colors = useChartColors();
+  const chartHeight = useResponsiveChartHeight();
 
   const data = HISTORICO_REAL.map((registro) => ({
     presidente: PRESIDENTES[registro.presidente].nombreCorto,
@@ -22,7 +24,8 @@ export const RealChart = () => {
       <h2 className="text-xl font-bold text-dark-text mb-4 text-center">
         Realidad Histórica
       </h2>
-      <ResponsiveContainer width="100%" height={400}>
+      <div role="img" aria-label="Gráfico de barras mostrando homicidios reales por sexenio presidencial en México desde 2000">
+        <ResponsiveContainer width="100%" height={chartHeight}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
           <XAxis
@@ -54,6 +57,7 @@ export const RealChart = () => {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+      </div>
       <div className="mt-4 text-center">
         <p className="text-dark-text-secondary text-sm">
           Valor Final: <span className="text-dark-text font-bold text-lg">

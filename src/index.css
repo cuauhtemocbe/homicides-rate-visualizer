@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Light Theme (default) */
 :root {
   --color-bg: #F5F5F5;
@@ -11,11 +24,11 @@
   --color-border: #E5E7EB;
 }
 
-/* Dark Theme */
+/* Dark Theme - WCAG AA compliant colors */
 .dark {
   --color-bg: #121212;
   --color-card: #1E1E1E;
   --color-text: #E0E0E0;
-  --color-text-secondary: #B0B0B0;
+  --color-text-secondary: #BDBDBD; /* Improved from #B0B0B0 for better contrast */
   --color-border: #2A2A2A;
 }

@@ -4,12 +4,14 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useChartColors } from '../../hooks/useChartColors';
+import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { PRESIDENTES } from '../../data/presidentes.data';
 import { formatNumberCompact } from '../../utils/formatNumber';
 
 export const WhatIfChart = () => {
   const colors = useChartColors();
+  const chartHeight = useResponsiveChartHeight();
   const { resultadoSimulacion, slotsActuales } = useSimulationStore();
 
   if (!resultadoSimulacion) {
@@ -45,7 +47,8 @@ export const WhatIfChart = () => {
       <h2 className="text-xl font-bold text-dark-text mb-4 text-center">
         Simulación What-If
       </h2>
-      <ResponsiveContainer width="100%" height={400}>
+      <div role="img" aria-label="Gráfico de barras mostrando el escenario hipotético de homicidios según la configuración de presidentes seleccionada">
+        <ResponsiveContainer width="100%" height={chartHeight}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
           <XAxis
@@ -77,6 +80,7 @@ export const WhatIfChart = () => {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+      </div>
       <div className="mt-4 text-center">
         <p className="text-dark-text-secondary text-sm">
           Valor Final: <span className="text-dark-text font-bold text-lg">
