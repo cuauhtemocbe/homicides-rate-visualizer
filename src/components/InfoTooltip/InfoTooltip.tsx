@@ -48,13 +48,13 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
           role="tooltip"
           className={`
             absolute z-50 ${positionClasses[position]}
-            px-3 py-2 rounded-lg
+            px-4 py-3 rounded-lg
             bg-dark-card border border-dark-border
-            text-dark-text text-sm
+            text-dark-text text-sm leading-relaxed
             shadow-lg
-            max-w-xs
             pointer-events-none
           `}
+          style={{ maxWidth: '32rem', minWidth: '20rem' }}
         >
           {content}
           {/* Tooltip arrow */}
