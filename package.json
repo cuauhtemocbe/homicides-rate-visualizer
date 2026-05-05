@@ -2,7 +2,16 @@
   "name": "mx-security-dark-sim",
   "version": "2.0.0",
   "description": "Interactive dark-mode simulator for analyzing homicide trends in Mexico with what-if scenarios",
-  "keywords": ["mexico", "data-science", "simulation", "dark-mode", "typescript", "react", "vite", "recharts"],
+  "keywords": [
+    "mexico",
+    "data-science",
+    "simulation",
+    "dark-mode",
+    "typescript",
+    "react",
+    "vite",
+    "recharts"
+  ],
   "author": "Kuautli <cuauhtemocbe@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -25,7 +34,7 @@
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "recharts": "3.8.1",
-    "vite": "^5.4.21",
+    "vite": "^6.4.2",
     "zustand": "5.0.12"
   },
   "devDependencies": {
