@@ -45,7 +45,7 @@ export const DataSourceFooter = () => {
         </div>
 
         <div className="mt-4 text-xs text-dark-text-secondary">
-          <p>MX Security What-If Simulator v2.0 | Dark Mode</p>
+          <p>Created by @Kuautli</p>
         </div>
       </div>
     </footer>

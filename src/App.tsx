@@ -125,7 +125,7 @@ function App() {
           </div>
 
           <h1 className="text-2xl md:text-4xl font-bold text-dark-text mb-2">
-            MX Security What-If Simulator
+            México: Simulador de Escenarios de Seguridad
           </h1>
           <p className="text-dark-text-secondary text-sm md:text-base px-4">
             Analiza escenarios hipotéticos de homicidios en México (2000-2026)

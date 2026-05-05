@@ -44,7 +44,7 @@ export const MetricsPanel = () => {
 
         {/* What-If */}
         <div className="text-center">
-          <p className="text-dark-text-secondary text-sm mb-2">Simulación What-If</p>
+          <p className="text-dark-text-secondary text-sm mb-2">Simulación ¿Y si?</p>
           <p className="text-dark-text font-bold text-3xl">
             {valorFinal.toLocaleString('es-MX')}
           </p>

@@ -68,7 +68,7 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
           <section>
             <h3 className="text-lg font-bold mb-2 text-accent">🎯 ¿Qué hace este simulador?</h3>
             <p className="text-dark-text-secondary">
-              Te permite responder preguntas "What-If" sobre homicidios en México (2000-2026).
+              Te permite responder preguntas "¿Y si?" sobre homicidios en México (2000-2026).
               Por ejemplo: <em>¿Qué habría pasado si AMLO hubiera gobernado en lugar de Calderón?</em>
             </p>
           </section>
@@ -114,7 +114,7 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
                 <strong>Realidad Histórica:</strong> Muestra lo que realmente sucedió
               </li>
               <li>
-                <strong>Simulación What-If:</strong> Muestra tu escenario alternativo
+                <strong>Simulación ¿Y si?:</strong> Muestra tu escenario alternativo
               </li>
               <li>
                 <strong>Comparación:</strong> Líneas que contrastan ambos escenarios

@@ -53,7 +53,7 @@ export const ComparisonChart = () => {
   return (
     <div className="bg-dark-card rounded-lg p-4 md:p-6">
       <h2 className="text-xl font-bold text-dark-text mb-3 text-center">
-        Comparación: Real vs What-If
+        Comparación: Real vs ¿Y si?
       </h2>
 
       {/* Mensaje sugerencia landscape mode */}
@@ -78,14 +78,14 @@ export const ComparisonChart = () => {
         <div className="text-dark-text-secondary">•</div>
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-          <span className="text-dark-text-secondary">What-If:</span>
+          <span className="text-dark-text-secondary">¿Y si?:</span>
           <span className="font-bold text-blue-500">
             {formatNumberCompact(resultadoSimulacion.valorFinal)}
           </span>
         </div>
       </div>
 
-      <div role="img" aria-label="Gráfico de líneas comparando la realidad histórica con el escenario What-If a través de los 5 sexenios">
+      <div role="img" aria-label="Gráfico de líneas comparando la realidad histórica con el escenario ¿Y si? a través de los 5 sexenios">
         <ResponsiveContainer width="100%" height={chartHeight}>
         <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
@@ -114,7 +114,7 @@ export const ComparisonChart = () => {
               padding: isMobile ? '6px 8px' : '8px 12px'
             }}
             formatter={(value, name) => {
-              const label = name === 'real' ? 'Real' : 'What-If';
+              const label = name === 'real' ? 'Real' : '¿Y si?';
               return [typeof value === 'number' ? formatNumberCompact(value) : '', label];
             }}
             offset={10}

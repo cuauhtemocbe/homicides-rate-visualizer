@@ -45,7 +45,7 @@ export const WhatIfChart = () => {
   return (
     <div className="bg-dark-card rounded-lg p-6">
       <h2 className="text-xl font-bold text-dark-text mb-4 text-center">
-        Simulación What-If
+        Simulación ¿Y si?
       </h2>
       <div role="img" aria-label="Gráfico de barras mostrando el escenario hipotético de homicidios según la configuración de presidentes seleccionada">
         <ResponsiveContainer width="100%" height={chartHeight}>
