@@ -1,6 +1,6 @@
 {
   "name": "mx-security-dark-sim",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Interactive dark-mode simulator for analyzing homicide trends in Mexico with what-if scenarios",
   "keywords": [
     "mexico",
@@ -19,13 +19,18 @@
   "main": "dist/index.html",
   "scripts": {
     "dev": "vite",
+    "start:dev": "vite --open",
     "build": "tsc && vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview --host 0.0.0.0",
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest --watch",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.vite",
+    "clean:all": "rm -rf dist node_modules .pnpm-store",
     "validate": "./scripts/validate.sh",
     "prepare": "husky"
   },

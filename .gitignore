@@ -2,6 +2,11 @@
 node_modules/
 .pnpm-store/
 
+# Lock files (pnpm only - ignore others)
+package-lock.json
+yarn.lock
+bun.lockb
+
 # Build
 dist/
 *.tsbuildinfo

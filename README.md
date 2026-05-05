@@ -104,15 +104,59 @@ La aplicación estará disponible en `http://localhost:5173/`
 
 ## ⚡ Scripts Disponibles
 
-| Script               | Descripción                                   |
-|----------------------|-----------------------------------------------|
-| `pnpm dev`           | Inicia el servidor de desarrollo (Vite)       |
-| `pnpm build`         | Construye para producción                     |
-| `pnpm typecheck`     | Revisa los tipos de TypeScript                |
-| `pnpm test`          | Ejecuta pruebas en modo watch                 |
-| `pnpm test:run`      | Ejecuta pruebas una sola vez                  |
-| `pnpm test:coverage` | Ejecuta pruebas con cobertura                 |
-| `pnpm preview`       | Previsualiza el build de producción           |
+### 🚀 Desarrollo
+
+| Script               | Descripción                                          |
+|----------------------|------------------------------------------------------|
+| `pnpm dev`           | Inicia servidor de desarrollo en http://localhost:5173 |
+| `pnpm start:dev`     | Inicia servidor de desarrollo y abre navegador automáticamente |
+| `pnpm preview`       | Previsualiza el build de producción localmente      |
+
+### 🏗️ Build y Validación
+
+| Script               | Descripción                                          |
+|----------------------|------------------------------------------------------|
+| `pnpm build`         | Compila TypeScript y construye para producción      |
+| `pnpm typecheck`     | Verifica tipos de TypeScript sin generar archivos   |
+| `pnpm lint`          | Ejecuta linter de TypeScript                         |
+| `pnpm validate`      | Ejecuta todas las validaciones (typecheck + tests + build) |
+
+### 🧪 Testing
+
+| Script               | Descripción                                          |
+|----------------------|------------------------------------------------------|
+| `pnpm test`          | Ejecuta pruebas en modo watch (reinicia al cambiar archivos) |
+| `pnpm test:run`      | Ejecuta pruebas una sola vez (para CI/CD)           |
+| `pnpm test:watch`    | Alias de `pnpm test` (modo watch explícito)         |
+| `pnpm test:coverage` | Ejecuta pruebas y genera reporte de cobertura       |
+| `pnpm test:ui`       | Abre interfaz gráfica de Vitest en el navegador     |
+
+### 🧹 Limpieza
+
+| Script               | Descripción                                          |
+|----------------------|------------------------------------------------------|
+| `pnpm clean`         | Limpia build artifacts (dist/, cache de Vite)       |
+| `pnpm clean:all`     | Limpia todo incluyendo node_modules y pnpm store    |
+
+### 📋 Comandos Útiles Frecuentes
+
+```bash
+# Desarrollo diario
+pnpm start:dev                    # Inicia dev server con navegador
+
+# Antes de commit
+pnpm validate                     # Valida typecheck + tests + build
+
+# Testing con coverage
+pnpm test:coverage                # Ver cobertura de tests
+pnpm test:ui                      # Debuggear tests visualmente
+
+# Limpieza y reinstalación
+pnpm clean:all && pnpm install    # Reinstalación completa
+
+# Verificar build de producción
+pnpm build && pnpm preview        # Build + preview local
+```
 
 ---
 
@@ -207,7 +251,7 @@ Los datos provienen de fuentes oficiales:
 - **Gráficas**: Recharts 2
 - **Styling**: Tailwind CSS 3
 - **Testing**: Vitest + React Testing Library
-- **Package Manager**: pnpm
+- **Package Manager**: pnpm ([¿Por qué pnpm?](./docs/PNPM.md))
 
 ---
 
