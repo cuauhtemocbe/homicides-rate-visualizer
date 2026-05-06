@@ -2,7 +2,7 @@
  * HelpModal - Onboarding and help documentation
  */
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   isOpen: boolean;
@@ -10,31 +10,39 @@ interface Props {
 }
 
 export const HelpModal = ({ isOpen, onClose }: Props) => {
-  // Close on Escape key
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  // Handle dialog open/close with native dialog element
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      dialog.showModal();
       document.body.style.overflow = 'hidden';
+    } else {
+      dialog.close();
+      document.body.style.overflow = 'unset';
     }
+
     return () => {
-      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
+  }, [isOpen]);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      ref={dialogRef}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm backdrop:bg-black/60 max-w-none w-full h-full m-0 p-0"
+      onClose={onClose}
       aria-labelledby="help-modal-title"
     >
+      <button
+        onClick={onClose}
+        className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm"
+        aria-label="Cerrar modal"
+        tabIndex={-1}
+      />
       <div
         className="
           bg-dark-card rounded-lg shadow-2xl
@@ -42,7 +50,6 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
           max-h-[90vh] overflow-y-auto
           border border-dark-border
         "
-        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center">
@@ -134,8 +141,7 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
 
           <section className="border-t border-dark-border pt-4">
             <p className="text-xs text-dark-text-secondary">
-              <strong>Fuentes:</strong> INEGI, SESNSP, World Bank |
-              <strong> Proyección 2024-2026:</strong> Basada en tendencia observada (-31%)
+              <strong>Fuentes:</strong> INEGI, SESNSP, World Bank | <strong>Proyección 2024-2026:</strong> Basada en tendencia observada (-31%)
             </p>
           </section>
         </div>
@@ -155,6 +161,6 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };

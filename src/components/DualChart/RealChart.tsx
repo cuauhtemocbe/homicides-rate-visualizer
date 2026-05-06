@@ -51,8 +51,8 @@ export const RealChart = () => {
             }
           />
           <Bar dataKey="homicidios" fill={colors.positiveBar}>
-            {data.map((entry, index) => (
-              <rect key={`bar-${index}`} fill={entry.color} />
+            {data.map((entry) => (
+              <rect key={`bar-${entry.presidente}`} fill={entry.color} />
             ))}
           </Bar>
         </BarChart>

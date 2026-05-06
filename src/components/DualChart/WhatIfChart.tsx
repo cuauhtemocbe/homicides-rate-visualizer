@@ -74,8 +74,8 @@ export const WhatIfChart = () => {
             }
           />
           <Bar dataKey="homicidios">
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
+            {data.map((entry) => (
+              <Cell key={`cell-${entry.presidente}`} fill={entry.color} />
             ))}
           </Bar>
         </BarChart>
