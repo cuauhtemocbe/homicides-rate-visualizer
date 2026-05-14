@@ -17,6 +17,7 @@
   "private": true,
   "type": "module",
   "main": "dist/index.html",
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "vite",
     "start:dev": "vite --open",
@@ -32,7 +33,7 @@
     "clean": "rm -rf dist node_modules/.vite",
     "clean:all": "rm -rf dist node_modules .pnpm-store",
     "validate": "./scripts/validate.sh",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "date-fns": "4.1.0",
