@@ -33,24 +33,35 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm backdrop:bg-black/60 max-w-none w-full h-full m-0 p-0"
+      className="backdrop:bg-black/60 backdrop:backdrop-blur-sm"
       onClose={onClose}
       aria-labelledby="help-modal-title"
+      style={{
+        padding: 0,
+        margin: 0,
+        maxWidth: 'none',
+        width: '100%',
+        height: '100%',
+        border: 'none',
+        background: 'transparent',
+      }}
     >
-      <button
-        onClick={onClose}
-        className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm"
-        aria-label="Cerrar modal"
-        tabIndex={-1}
-      />
-      <div
-        className="
-          bg-dark-card rounded-lg shadow-2xl
-          max-w-2xl w-full mx-4
-          max-h-[90vh] overflow-y-auto
-          border border-dark-border
-        "
-      >
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <button
+          onClick={onClose}
+          className="absolute inset-0 cursor-default"
+          aria-label="Cerrar modal"
+          tabIndex={-1}
+        />
+        <div
+          className="
+            relative z-10
+            bg-dark-card rounded-lg shadow-2xl
+            max-w-2xl w-full
+            max-h-[90vh] overflow-y-auto
+            border border-dark-border
+          "
+        >
         {/* Header */}
         <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center">
           <h2 id="help-modal-title" className="text-2xl font-bold text-dark-text">
@@ -160,6 +171,7 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
             Entendido, empezar a simular
           </button>
         </div>
+      </div>
       </div>
     </dialog>
   );
