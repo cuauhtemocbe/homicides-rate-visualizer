@@ -6,6 +6,7 @@
 import { useEffect, useState } from 'react';
 import { useSimulationStore } from './store/useSimulationStore';
 import { useShareSimulation } from './hooks/useShareSimulation';
+import { useFirstVisit } from './hooks/useFirstVisit';
 import { DualChart } from './components/DualChart/DualChart';
 import { SimulationControls } from './components/SimulationControls/SimulationControls';
 import { MetricsPanel } from './components/MetricsPanel/MetricsPanel';
@@ -18,9 +19,24 @@ function App() {
   const inicializar = useSimulationStore((state) => state.inicializar);
   const [isDark, setIsDark] = useState(true);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isWelcome, setIsWelcome] = useState(false);
 
   // Initialize share functionality (reads URL params on mount)
   useShareSimulation();
+
+  // Auto-open the guide on first visit, framed as a welcome rather than help
+  const isFirstVisit = useFirstVisit();
+  useEffect(() => {
+    if (isFirstVisit) {
+      setIsHelpOpen(true);
+      setIsWelcome(true);
+    }
+  }, [isFirstVisit]);
+
+  const closeHelp = () => {
+    setIsHelpOpen(false);
+    setIsWelcome(false);
+  };
 
   // Aplicar tema y inicializar simulación
   useEffect(() => {
@@ -148,7 +164,7 @@ function App() {
         </main>
 
         {/* Help Modal */}
-        <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+        <HelpModal isOpen={isHelpOpen} onClose={closeHelp} isWelcome={isWelcome} />
       </div>
     </div>
   );

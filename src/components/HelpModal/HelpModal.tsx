@@ -7,9 +7,11 @@ import { useEffect, useRef } from 'react';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  /** True when the modal opens automatically on the visitor's first visit */
+  isWelcome?: boolean;
 }
 
-export const HelpModal = ({ isOpen, onClose }: Props) => {
+export const HelpModal = ({ isOpen, onClose, isWelcome = false }: Props) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   // Handle dialog open/close with native dialog element
@@ -55,7 +57,7 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
         />
         <div
           className="
-            relative z-10
+            relative z-10 animate-modal-in
             bg-dark-card rounded-lg shadow-2xl
             max-w-2xl w-full
             max-h-[90vh] overflow-y-auto
@@ -63,13 +65,21 @@ export const HelpModal = ({ isOpen, onClose }: Props) => {
           "
         >
         {/* Header */}
-        <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center">
-          <h2 id="help-modal-title" className="text-2xl font-bold text-dark-text">
-            ❓ Guía del Simulador
-          </h2>
+        <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center gap-4">
+          <div>
+            <h2 id="help-modal-title" className="text-2xl font-bold text-dark-text">
+              {isWelcome ? '👋 Bienvenido al simulador ¿Y si?' : '❓ Guía del Simulador'}
+            </h2>
+            {isWelcome && (
+              <p className="text-dark-text-secondary text-sm mt-1">
+                Cada sexenio que elijas se acumula sobre el anterior, como una cascada. Así funciona:
+              </p>
+            )}
+          </div>
           <button
             onClick={onClose}
             className="
+              flex-shrink-0
               text-dark-text-secondary hover:text-dark-text
               text-2xl leading-none
               focus:outline-none focus:ring-2 focus:ring-accent rounded

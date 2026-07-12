@@ -2,7 +2,7 @@
  * InfoTooltip - Reusable tooltip component for contextual help
  */
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   content: string;
@@ -12,6 +12,21 @@ interface Props {
 
 export const InfoTooltip = ({ content, position = 'top', className = '' }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // On touch devices there's no hover, so a tap outside is what closes the tooltip
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) {
+        setIsVisible(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [isVisible]);
 
   const positionClasses = {
     top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -21,13 +36,14 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
   };
 
   return (
-    <div className={`relative inline-flex items-center ${className}`}>
+    <div ref={containerRef} className={`relative inline-flex items-center ${className}`}>
       <button
         type="button"
-        onMouseEnter={() => setIsVisible(true)}
-        onMouseLeave={() => setIsVisible(false)}
+        onPointerEnter={(e) => e.pointerType === 'mouse' && setIsVisible(true)}
+        onPointerLeave={(e) => e.pointerType === 'mouse' && setIsVisible(false)}
         onFocus={() => setIsVisible(true)}
         onBlur={() => setIsVisible(false)}
+        onClick={() => setIsVisible(true)}
         className="
           inline-flex items-center justify-center
           w-5 h-5 rounded-full
@@ -52,7 +68,6 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
             bg-dark-card border border-dark-border
             text-dark-text text-sm leading-relaxed
             shadow-lg
-            pointer-events-none
           `}
           style={{ maxWidth: '32rem', minWidth: '20rem' }}
         >

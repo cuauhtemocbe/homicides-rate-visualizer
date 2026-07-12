@@ -39,3 +39,4 @@ Thumbs.db
 .claude/
 .mcp.json
 sonar-project.properties
+.codegraph/
