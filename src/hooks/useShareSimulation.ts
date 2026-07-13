@@ -4,7 +4,7 @@
 
 import { useCallback, useEffect } from 'react';
 import { useSimulationStore } from '../store/useSimulationStore';
-import type { PresidenteId } from '../data/types';
+import { validatePresidenteId } from '../utils/validatePresidenteId';
 
 export const useShareSimulation = () => {
   const { slotsActuales, setSlot } = useSimulationStore();
@@ -45,10 +45,10 @@ export const useShareSimulation = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
-    const s1 = params.get('s1') as PresidenteId | null;
-    const s2 = params.get('s2') as PresidenteId | null;
-    const s3 = params.get('s3') as PresidenteId | null;
-    const s4 = params.get('s4') as PresidenteId | null;
+    const s1 = validatePresidenteId(params.get('s1'));
+    const s2 = validatePresidenteId(params.get('s2'));
+    const s3 = validatePresidenteId(params.get('s3'));
+    const s4 = validatePresidenteId(params.get('s4'));
 
     // Solo aplica si hay al menos un slot en la URL
     if (s1 || s2 || s3 || s4) {
