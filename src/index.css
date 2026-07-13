@@ -62,8 +62,26 @@
   animation: modal-in 180ms ease-out;
 }
 
+/* Metrics recalculation feedback */
+@keyframes metrics-highlight {
+  0% {
+    background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-metrics-highlight {
+  animation: metrics-highlight 600ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-modal-in {
+    animation: none;
+  }
+
+  .animate-metrics-highlight {
     animation: none;
   }
 }

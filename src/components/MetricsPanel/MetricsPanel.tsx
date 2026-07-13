@@ -2,12 +2,35 @@
  * Panel de Métricas Comparativas
  */
 
+import { useEffect, useRef, useState } from 'react';
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { VALOR_REAL_FINAL } from '../../data/historico.data';
 import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+
+const HIGHLIGHT_DURATION_MS = 600;
 
 export const MetricsPanel = () => {
   const { resultadoSimulacion } = useSimulationStore();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [isHighlighting, setIsHighlighting] = useState(false);
+  const hasShownResultBefore = useRef(false);
+
+  useEffect(() => {
+    if (!resultadoSimulacion) return;
+
+    // The first time a result appears is the initial load, not a user-triggered recalculation
+    if (!hasShownResultBefore.current) {
+      hasShownResultBefore.current = true;
+      return;
+    }
+
+    if (prefersReducedMotion) return;
+
+    setIsHighlighting(true);
+    const timeout = setTimeout(() => setIsHighlighting(false), HIGHLIGHT_DURATION_MS);
+    return () => clearTimeout(timeout);
+  }, [resultadoSimulacion, prefersReducedMotion]);
 
   if (!resultadoSimulacion) {
     return null;
@@ -21,7 +44,10 @@ export const MetricsPanel = () => {
   const diferenciaIcon = diferencia >= 0 ? '↑' : '↓';
 
   return (
-    <div className="bg-dark-card rounded-lg p-6">
+    <div
+      data-testid="metrics-panel"
+      className={`bg-dark-card rounded-lg p-6 ${isHighlighting ? 'animate-metrics-highlight' : ''}`}
+    >
       <div className="flex items-center justify-center gap-2 mb-6">
         <h3 className="text-lg font-bold text-dark-text">
           Comparación de Resultados

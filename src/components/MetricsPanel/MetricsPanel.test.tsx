@@ -2,11 +2,22 @@
  * Tests for MetricsPanel
  */
 
-import { describe, it, expect, afterEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { act, render, screen } from '@testing-library/react';
 import { MetricsPanel } from './MetricsPanel';
 import { useSimulationStore } from '../../store/useSimulationStore';
 import type { ResultadoSimulacion } from '../../data/types';
+
+const HIGHLIGHT_CLASS = 'animate-metrics-highlight';
+
+const mockMatchMedia = (matches: boolean) => {
+  vi.stubGlobal('matchMedia', (query: string) => ({
+    matches,
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn()
+  }));
+};
 
 const baseResultado: ResultadoSimulacion = {
   slots: { slot0: 'fox', slot1: 'calderon', slot2: 'pena', slot3: 'amlo', slot4: 'sheinbaum' },
@@ -19,6 +30,7 @@ const baseResultado: ResultadoSimulacion = {
 describe('MetricsPanel', () => {
   afterEach(() => {
     useSimulationStore.setState({ resultadoSimulacion: null });
+    vi.unstubAllGlobals();
   });
 
   it('shows the exact computed percentage difference when the what-if scenario is worse', () => {
@@ -51,5 +63,45 @@ describe('MetricsPanel', () => {
   it('renders nothing while the simulation has not run yet', () => {
     const { container } = render(<MetricsPanel />);
     expect(container).toBeEmptyDOMElement();
+  });
+
+  it('does not apply the highlight animation on initial load', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    expect(screen.getByTestId('metrics-panel')).not.toHaveClass(HIGHLIGHT_CLASS);
+  });
+
+  it('applies the highlight animation when a slot change produces a new result', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+    expect(screen.getByTestId('metrics-panel')).not.toHaveClass(HIGHLIGHT_CLASS);
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+      });
+    });
+
+    expect(screen.getByTestId('metrics-panel')).toHaveClass(HIGHLIGHT_CLASS);
+  });
+
+  it('does not apply the highlight animation when the user prefers reduced motion', () => {
+    mockMatchMedia(true);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+      });
+    });
+
+    expect(screen.getByTestId('metrics-panel')).not.toHaveClass(HIGHLIGHT_CLASS);
   });
 });
