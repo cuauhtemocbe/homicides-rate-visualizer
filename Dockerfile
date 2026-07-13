@@ -1,5 +1,5 @@
 # ---------- Builder ----------
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 
 RUN apk add --no-cache git
 ENV PNPM_HOME="/root/.local/share/pnpm"
@@ -16,7 +16,7 @@ COPY . .
 RUN pnpm run typecheck && pnpm run build
 
 # ---------- Production ----------
-FROM node:22-alpine AS production
+FROM node:24-alpine AS production
 
 RUN apk add --no-cache curl
 ENV NODE_ENV=production
