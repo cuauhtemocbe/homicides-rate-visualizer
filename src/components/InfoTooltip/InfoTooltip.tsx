@@ -2,7 +2,8 @@
  * InfoTooltip - Reusable tooltip component for contextual help
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { getClampedTooltipWidth, getTooltipHorizontalDelta } from '../../utils/tooltipPosition';
 
 interface Props {
   content: string;
@@ -10,9 +11,13 @@ interface Props {
   className?: string;
 }
 
+const VIEWPORT_MARGIN = 8;
+
 export const InfoTooltip = ({ content, position = 'top', className = '' }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [panelStyle, setPanelStyle] = useState<React.CSSProperties>({});
 
   // On touch devices there's no hover, so a tap outside is what closes the tooltip
   useEffect(() => {
@@ -27,6 +32,38 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
     document.addEventListener('pointerdown', handlePointerDown);
     return () => document.removeEventListener('pointerdown', handlePointerDown);
   }, [isVisible]);
+
+  // Clamp the panel to the viewport so it doesn't overflow near screen edges
+  useLayoutEffect(() => {
+    if (!isVisible || (position !== 'top' && position !== 'bottom')) {
+      setPanelStyle({});
+      return;
+    }
+
+    const computePosition = () => {
+      const container = containerRef.current;
+      const panel = panelRef.current;
+      if (!container || !panel) return;
+
+      const viewportWidth = window.innerWidth;
+      const containerRect = container.getBoundingClientRect();
+      const triggerCenterX = containerRect.left + containerRect.width / 2;
+      const naturalWidth = panel.getBoundingClientRect().width;
+      const width = getClampedTooltipWidth(naturalWidth, viewportWidth, VIEWPORT_MARGIN);
+      const delta = getTooltipHorizontalDelta(triggerCenterX, width, viewportWidth, VIEWPORT_MARGIN);
+      const isClamped = width < naturalWidth;
+
+      setPanelStyle({
+        minWidth: isClamped ? undefined : '20rem',
+        width: isClamped ? `${width}px` : undefined,
+        transform: `translateX(calc(-50% + ${delta}px))`
+      });
+    };
+
+    computePosition();
+    window.addEventListener('resize', computePosition);
+    return () => window.removeEventListener('resize', computePosition);
+  }, [isVisible, position]);
 
   const positionClasses = {
     top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -61,6 +98,7 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
 
       {isVisible && (
         <div
+          ref={panelRef}
           role="tooltip"
           className={`
             absolute z-50 ${positionClasses[position]}
@@ -69,7 +107,7 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
             text-dark-text text-sm leading-relaxed
             shadow-lg
           `}
-          style={{ maxWidth: '32rem', minWidth: '20rem' }}
+          style={{ maxWidth: '32rem', minWidth: '20rem', ...panelStyle }}
         >
           {content}
           {/* Tooltip arrow */}
