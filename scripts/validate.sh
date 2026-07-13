@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Non-interactive shells (e.g. git hooks) don't source the interactive-only
-# part of ~/.bashrc, so global npm/pnpm install dirs may be missing from PATH.
+# part of ~/.bashrc, so global npm/pnpm install dirs may be missing from PATH,
+# and `node` may resolve to an older system install instead of the
+# nvm-managed version pnpm requires.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 export PATH="$HOME/.npm-global/bin:$HOME/.local/share/pnpm:$PATH"
 
 # Pre-deployment validation script
