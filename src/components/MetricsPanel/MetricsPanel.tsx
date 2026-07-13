@@ -62,7 +62,7 @@ export const MetricsPanel = () => {
         {/* Realidad */}
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Realidad Histórica</p>
-          <p className="text-dark-text font-bold text-3xl">
+          <p className="font-display font-bold text-dark-text text-4xl tracking-wide">
             {VALOR_REAL_FINAL.toLocaleString('es-MX')}
           </p>
           <p className="text-dark-text-secondary text-xs mt-1">homicidios</p>
@@ -71,7 +71,7 @@ export const MetricsPanel = () => {
         {/* What-If */}
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Simulación ¿Y si?</p>
-          <p className="text-dark-text font-bold text-3xl">
+          <p className="font-display font-bold text-dark-text text-4xl tracking-wide">
             {valorFinal.toLocaleString('es-MX')}
           </p>
           <p className="text-dark-text-secondary text-xs mt-1">homicidios</p>
@@ -80,7 +80,7 @@ export const MetricsPanel = () => {
         {/* Diferencia */}
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Diferencia</p>
-          <p data-testid="diferencia-value" className={`font-bold text-3xl ${diferenciaColor}`}>
+          <p data-testid="diferencia-value" className={`font-display font-bold text-4xl tracking-wide ${diferenciaColor}`}>
             {diferenciaIcon} {Math.abs(diferencia).toLocaleString('es-MX')}
           </p>
           <p className={`text-sm mt-1 ${diferenciaColor}`}>

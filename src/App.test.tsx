@@ -42,3 +42,31 @@ describe('App header controls', () => {
     });
   });
 });
+
+describe('App typography (issue #17: distinct display typography)', () => {
+  beforeAll(() => {
+    HTMLDialogElement.prototype.showModal = vi.fn();
+    HTMLDialogElement.prototype.close = vi.fn();
+  });
+
+  beforeEach(() => {
+    localStorage.setItem('mx-simulator:has-visited', 'true');
+  });
+
+  it('applies the font-display class to the page title', () => {
+    render(<App />);
+
+    const title = screen.getByRole('heading', {
+      name: 'México: Simulador de Escenarios de Seguridad',
+      level: 1,
+    });
+    expect(title).toHaveClass('font-display');
+  });
+
+  it('does not apply the font-display class to the body subtitle', () => {
+    render(<App />);
+
+    const subtitle = screen.getByText(/Analiza escenarios hipotéticos/);
+    expect(subtitle).not.toHaveClass('font-display');
+  });
+});

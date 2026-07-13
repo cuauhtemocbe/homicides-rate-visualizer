@@ -13,6 +13,11 @@
   --color-danger: #EF4444;  /* Red: increase in homicides (bad) */
   --color-success: #10B981; /* Green: decrease in homicides (good) */
   --color-accent: #3B82F6;
+
+  /* Display face for the title and headline figures: a condensed,
+     stencilled grotesk built for large at-a-glance numerals — reads as an
+     official statistical bulletin, not a dashboard template. */
+  --font-display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
 }
 
 /* Screen reader only utility */

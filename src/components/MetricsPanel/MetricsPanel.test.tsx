@@ -104,4 +104,23 @@ describe('MetricsPanel', () => {
 
     expect(screen.getByTestId('metrics-panel')).not.toHaveClass(HIGHLIGHT_CLASS);
   });
+
+  it('applies the font-display class to the three headline numbers (issue #17)', () => {
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    expect(screen.getByText('20,536')).toHaveClass('font-display');
+    expect(screen.getByText('23,616')).toHaveClass('font-display');
+    expect(screen.getByTestId('diferencia-value')).toHaveClass('font-display');
+  });
+
+  it('does not apply the font-display class to labels or units (issue #17)', () => {
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    expect(screen.getByText('Realidad Histórica')).not.toHaveClass('font-display');
+    expect(screen.getAllByText('homicidios')[0]).not.toHaveClass('font-display');
+  });
 });
