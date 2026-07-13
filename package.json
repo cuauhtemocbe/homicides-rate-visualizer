@@ -36,25 +36,25 @@
     "prepare": "husky || true"
   },
   "dependencies": {
-    "date-fns": "4.1.0",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
-    "recharts": "3.8.1",
+    "date-fns": "4.4.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "recharts": "3.9.2",
     "vite": "^6.4.2",
-    "zustand": "5.0.12"
+    "zustand": "5.0.14"
   },
   "devDependencies": {
     "@types/node": "^22.18.1",
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.2.0",
     "@vitest/coverage-v8": "^2.0.5",
     "@vitest/ui": "^2.0.5",
-    "autoprefixer": "10.5.0",
+    "autoprefixer": "10.5.2",
     "husky": "^9.1.7",
     "jsdom": "^25.0.0",
     "lint-staged": "^16.1.6",
-    "postcss": "8.5.13",
+    "postcss": "8.5.18",
     "tailwindcss": "3.4.19",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
