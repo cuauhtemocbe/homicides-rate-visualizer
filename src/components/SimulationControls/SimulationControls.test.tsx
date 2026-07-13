@@ -44,4 +44,12 @@ describe('SimulationControls', () => {
       new SimulationEngine().getConfiguracionHistorica()
     );
   });
+
+  it('renders the reset button with a custom icon instead of an emoji', () => {
+    render(<SimulationControls />);
+
+    const button = screen.getByTestId('reset-button');
+    expect(button.querySelector('svg')).toBeInTheDocument();
+    expect(button.textContent).not.toContain('⟲');
+  });
 });

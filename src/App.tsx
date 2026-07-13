@@ -13,6 +13,7 @@ import { MetricsPanel } from './components/MetricsPanel/MetricsPanel';
 import { DataSourceFooter } from './components/DataSourceFooter/DataSourceFooter';
 import { HelpModal } from './components/HelpModal/HelpModal';
 import { ShareButton } from './components/ShareButton/ShareButton';
+import { HelpIcon, SunIcon, MoonIcon } from './components/icons/Icons';
 import './index.css';
 
 function App() {
@@ -85,7 +86,7 @@ function App() {
                 "
                 aria-label="Abrir ayuda"
               >
-                ❓ Ayuda
+                <HelpIcon className="w-4 h-4" /> Ayuda
               </button>
 
               <ShareButton />
@@ -100,7 +101,7 @@ function App() {
                 "
                 aria-label="Cambiar tema"
               >
-                {isDark ? '☀️' : '🌙'}
+                {isDark ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -118,7 +119,7 @@ function App() {
                 "
                 aria-label="Abrir ayuda"
               >
-                ❓ Ayuda
+                <HelpIcon className="w-4 h-4" /> Ayuda
               </button>
 
               <ShareButton />
@@ -136,7 +137,15 @@ function App() {
               "
               aria-label="Cambiar tema"
             >
-              {isDark ? '☀️ Tema Claro' : '🌙 Tema Oscuro'}
+              {isDark ? (
+                <>
+                  <SunIcon className="w-4 h-4" /> Tema Claro
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="w-4 h-4" /> Tema Oscuro
+                </>
+              )}
             </button>
           </div>
 

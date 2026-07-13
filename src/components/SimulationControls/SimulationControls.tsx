@@ -5,6 +5,7 @@
 import { useSimulationStore } from '../../store/useSimulationStore';
 import { PresidentSlot } from './PresidentSlot';
 import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
+import { ResetIcon } from '../icons/Icons';
 import type { PresidenteId } from '../../data/types';
 
 export const SimulationControls = () => {
@@ -112,11 +113,12 @@ export const SimulationControls = () => {
             bg-accent text-white px-6 py-2 rounded-lg
             hover:bg-blue-600 transition-colors
             focus:outline-none focus:ring-2 focus:ring-accent
+            flex items-center gap-2
           "
           data-testid="reset-button"
           aria-label="Resetear simulación al escenario histórico real"
         >
-          ⟲ Resetear a Histórico
+          <ResetIcon className="w-4 h-4" /> Resetear a Histórico
         </button>
         <InfoTooltip
           content="Restaura la configuración original: Fox → Calderón → Peña Nieto → AMLO → Sheinbaum"

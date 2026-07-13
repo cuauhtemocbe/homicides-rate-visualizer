@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { useShareSimulation } from '../../hooks/useShareSimulation';
+import { LinkIcon, CheckIcon } from '../icons/Icons';
 
 export const ShareButton = () => {
   const { copyShareUrl } = useShareSimulation();
@@ -35,13 +36,13 @@ export const ShareButton = () => {
     >
       {copied ? (
         <>
-          <span className="hidden md:inline">✓ Copiado</span>
-          <span className="md:hidden">✓</span>
+          <span className="hidden md:inline-flex items-center gap-2"><CheckIcon className="w-4 h-4" /> Copiado</span>
+          <CheckIcon className="w-4 h-4 md:hidden" />
         </>
       ) : (
         <>
-          <span className="hidden md:inline">🔗 Compartir</span>
-          <span className="md:hidden">🔗</span>
+          <span className="hidden md:inline-flex items-center gap-2"><LinkIcon className="w-4 h-4" /> Compartir</span>
+          <LinkIcon className="w-4 h-4 md:hidden" />
         </>
       )}
     </button>
