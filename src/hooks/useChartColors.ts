@@ -42,6 +42,7 @@ export const useChartColors = () => {
 
       // Estados
       accent: '#3B82F6',         // Color de acento
+      neutralLine: '#B0B0B0',    // Línea "Real": neutral, sin significado bueno/malo
       background: '#121212',     // Fondo general
       cardBg: '#1E1E1E'          // Fondo de cards
     };
@@ -64,6 +65,7 @@ export const useChartColors = () => {
 
       // Estados
       accent: '#3B82F6',         // Color de acento
+      neutralLine: '#6B7280',    // Línea "Real": neutral, sin significado bueno/malo
       background: '#F5F5F5',     // Fondo general
       cardBg: '#FFFFFF'          // Fondo de cards
     };

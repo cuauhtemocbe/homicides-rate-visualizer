@@ -69,17 +69,27 @@ export const ComparisonChart = () => {
       {/* Leyenda compacta inline con valores finales */}
       <div className="mb-3 flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm">
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div
+            data-testid="legend-swatch-real"
+            data-dashed="false"
+            className="w-4 h-0.5"
+            style={{ backgroundColor: colors.neutralLine }}
+          ></div>
           <span className="text-dark-text-secondary">Real:</span>
-          <span className="font-bold text-red-500">
+          <span className="font-bold" style={{ color: colors.neutralLine }}>
             {formatNumberCompact(HISTORICO_REAL[4].homicidios)}
           </span>
         </div>
         <div className="text-dark-text-secondary">•</div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+          <div
+            data-testid="legend-swatch-whatif"
+            data-dashed="true"
+            className="w-4 h-0 border-t-2 border-dashed"
+            style={{ borderColor: colors.accent }}
+          ></div>
           <span className="text-dark-text-secondary">¿Y si?:</span>
-          <span className="font-bold text-blue-500">
+          <span className="font-bold" style={{ color: colors.accent }}>
             {formatNumberCompact(resultadoSimulacion.valorFinal)}
           </span>
         </div>
@@ -124,18 +134,21 @@ export const ComparisonChart = () => {
           <Line
             type="monotone"
             dataKey="real"
-            stroke="#ef4444"
+            stroke={colors.neutralLine}
             strokeWidth={3}
-            dot={{ fill: '#ef4444', r: isMobile ? 4 : 5 }}
+            isAnimationActive={false}
+            dot={{ fill: colors.neutralLine, r: isMobile ? 4 : 5 }}
             activeDot={{ r: isMobile ? 6 : 7 }}
             name="real"
           />
           <Line
             type="monotone"
             dataKey="whatIf"
-            stroke="#3b82f6"
+            stroke={colors.accent}
             strokeWidth={3}
-            dot={{ fill: '#3b82f6', r: isMobile ? 4 : 5 }}
+            strokeDasharray="6 4"
+            isAnimationActive={false}
+            dot={{ fill: colors.accent, r: isMobile ? 4 : 5 }}
             activeDot={{ r: isMobile ? 6 : 7 }}
             name="whatIf"
           />

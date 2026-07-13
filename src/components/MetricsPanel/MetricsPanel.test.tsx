@@ -28,6 +28,7 @@ describe('MetricsPanel', () => {
 
     expect(screen.getByText('+15.0%')).toBeInTheDocument();
     expect(screen.getByText(/↑ 3,080/)).toBeInTheDocument();
+    expect(screen.getByTestId('diferencia-value')).toHaveClass('text-danger');
   });
 
   it('shows the exact computed percentage difference when the what-if scenario is better', () => {
@@ -44,6 +45,7 @@ describe('MetricsPanel', () => {
 
     expect(screen.getByText('-27.0%')).toBeInTheDocument();
     expect(screen.getByText(/↓ 5,536/)).toBeInTheDocument();
+    expect(screen.getByTestId('diferencia-value')).toHaveClass('text-success');
   });
 
   it('renders nothing while the simulation has not run yet', () => {

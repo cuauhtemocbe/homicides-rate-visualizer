@@ -54,7 +54,7 @@ export const MetricsPanel = () => {
         {/* Diferencia */}
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Diferencia</p>
-          <p className={`font-bold text-3xl ${diferenciaColor}`}>
+          <p data-testid="diferencia-value" className={`font-bold text-3xl ${diferenciaColor}`}>
             {diferenciaIcon} {Math.abs(diferencia).toLocaleString('es-MX')}
           </p>
           <p className={`text-sm mt-1 ${diferenciaColor}`}>
