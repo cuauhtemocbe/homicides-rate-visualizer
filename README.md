@@ -68,10 +68,10 @@ Slot 4: [Presidente seleccionado]
 | Presidente       | Tasa de Crecimiento | Multiplicador | Cierre Oficial |
 |------------------|---------------------|---------------|----------------|
 | V. Fox           | +1.6%               | 1.016         | 10,452         |
-| F. Calderón      | +192.8%             | 2.928         | 25,967         |
-| E. Peña Nieto    | +59.0%              | 1.59          | 36,685         |
-| AMLO             | -22.0%              | 0.78          | 29,741         |
-| C. Sheinbaum*    | -31.0%              | 0.69          | 20,536         |
+| F. Calderón      | +148.4%             | 2.484         | 25,967         |
+| E. Peña Nieto    | +41.3%              | 1.413         | 36,685         |
+| AMLO             | -18.9%              | 0.811         | 29,741         |
+| C. Sheinbaum*    | -31.0%              | 0.690         | 20,536         |
 
 _*Datos proyectados con base en tendencia observada hasta mayo 2026_
 
