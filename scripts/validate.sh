@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Non-interactive shells (e.g. git hooks) don't source the interactive-only
+# part of ~/.bashrc, so global npm/pnpm install dirs may be missing from PATH.
+export PATH="$HOME/.npm-global/bin:$HOME/.local/share/pnpm:$PATH"
+
 # Pre-deployment validation script
 echo "🔍 Running pre-deployment checks..."
 
