@@ -4,11 +4,11 @@ FROM node:24-alpine AS builder
 RUN apk add --no-cache git
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN corepack enable && corepack prepare pnpm@11.12.0 --activate
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 ENV HUSKY=0
 RUN pnpm install --frozen-lockfile
 
@@ -24,7 +24,8 @@ ENV PNPM_HOME="/home/node/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV PORT=8080
 
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN corepack enable && corepack prepare pnpm@11.12.0 --activate && \
+    pnpm config set global-bin-dir "$PNPM_HOME"
 
 # Create user without privileges
 RUN adduser -D -u 10001 nodeuser
