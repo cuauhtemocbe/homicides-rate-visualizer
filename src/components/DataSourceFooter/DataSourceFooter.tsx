@@ -36,11 +36,13 @@ export const DataSourceFooter = () => {
         </div>
 
         <div className="border-t border-dark-border pt-4">
-          <p className="text-xs text-dark-text-secondary max-w-3xl mx-auto">
-            <strong className="text-accent">Nota sobre Proyecciones:</strong> Los datos de la administración de
-            Claudia Sheinbaum (2024-2030) están <strong>proyectados</strong> con base en la tendencia de reducción
-            del -31% observada hasta mayo de 2026. Estos valores deben considerarse estimaciones sujetas a cambios
-            conforme se publiquen datos oficiales adicionales.
+          <p className="text-xs font-semibold text-accent text-center uppercase tracking-wide mb-1">
+            Nota sobre Proyecciones
+          </p>
+          <p className="text-xs text-dark-text-secondary max-w-3xl mx-auto text-center">
+            Los datos de la administración de Claudia Sheinbaum (2024-2030) están <strong>proyectados</strong> con
+            base en la tendencia de reducción del -31% observada hasta mayo de 2026. Estos valores deben
+            considerarse estimaciones sujetas a cambios conforme se publiquen datos oficiales adicionales.
           </p>
         </div>
 
