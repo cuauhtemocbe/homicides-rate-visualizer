@@ -5,6 +5,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import type { DotItemDotProps, ActiveDotProps } from 'recharts';
+import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator';
 import { useChartColors } from '../../hooks/useChartColors';
 import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
 import { useOrientation } from '../../hooks/useOrientation';
@@ -72,7 +73,7 @@ export const ComparisonChart = () => {
   if (!resultadoSimulacion) {
     return (
       <div className="bg-dark-card rounded-lg p-6 flex items-center justify-center h-[500px]">
-        <p className="text-dark-text-secondary">Calculando simulación...</p>
+        <LoadingIndicator label="Calculando simulación..." />
       </div>
     );
   }

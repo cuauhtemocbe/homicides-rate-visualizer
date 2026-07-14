@@ -3,6 +3,7 @@
  */
 
 import { lazy, Suspense } from 'react';
+import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator';
 
 // Recharts is the largest dependency in the bundle; load it on demand
 // so it's not part of the initial JS chunk.
@@ -12,7 +13,7 @@ const ComparisonChart = lazy(() =>
 
 const ChartFallback = () => (
   <div className="bg-dark-card rounded-lg p-6 flex items-center justify-center h-[500px]">
-    <p className="text-dark-text-secondary">Cargando gráfica...</p>
+    <LoadingIndicator label="Cargando gráfica..." />
   </div>
 );
 

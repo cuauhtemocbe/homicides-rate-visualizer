@@ -42,9 +42,11 @@ describe('ComparisonChart', () => {
     useSimulationStore.setState({ resultadoSimulacion: null });
   });
 
-  it('shows a loading state until a simulation result exists', () => {
+  it('shows a branded loading state with role="status" until a simulation result exists', () => {
     render(<ComparisonChart />);
-    expect(screen.getByText('Calculando simulación...')).toBeInTheDocument();
+    const status = screen.getByRole('status', { name: 'Calculando simulación...' });
+    expect(status).toBeInTheDocument();
+    expect(status.textContent).toContain('Calculando simulación...');
   });
 
   it('renders both the Real and ¿Y si? series with correct labels once a result exists', () => {
