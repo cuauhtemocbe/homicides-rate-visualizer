@@ -99,15 +99,28 @@ describe('ComparisonChart', () => {
     expect(whatIfPath.getAttribute('stroke')).not.toBe(realPath.getAttribute('stroke'));
   });
 
-  it('renders the Real line solid and the What-If line dashed', () => {
+  it('renders both the Real and What-If lines as thin solid strokes', () => {
     const { container } = renderWithResult();
 
     const [realPath, whatIfPath] = Array.from(container.querySelectorAll('.recharts-line-curve'));
     expect(realPath.getAttribute('stroke-dasharray')).toBeFalsy();
-    expect(whatIfPath.getAttribute('stroke-dasharray')).toBeTruthy();
+    expect(whatIfPath.getAttribute('stroke-dasharray')).toBeFalsy();
+    expect(Number(realPath.getAttribute('stroke-width'))).toBeLessThan(3);
+    expect(Number(whatIfPath.getAttribute('stroke-width'))).toBeLessThan(3);
   });
 
-  it('renders legend swatches matching the Real and What-If line colors and patterns', () => {
+  it('renders the Real markers as circles and the What-If markers as a distinct non-circular shape', () => {
+    const { container } = renderWithResult();
+
+    const realDots = container.querySelectorAll('circle.recharts-dot');
+    const whatIfMarkers = container.querySelectorAll('[data-testid="whatif-marker"]');
+
+    expect(realDots.length).toBeGreaterThan(0);
+    expect(whatIfMarkers.length).toBeGreaterThan(0);
+    whatIfMarkers.forEach((marker) => expect(marker.tagName.toLowerCase()).not.toBe('circle'));
+  });
+
+  it('renders legend swatches reflecting marker shape instead of a dash pattern', () => {
     const { container, getByTestId } = renderWithResult();
 
     const [realPath, whatIfPath] = Array.from(container.querySelectorAll('.recharts-line-curve'));
@@ -116,8 +129,22 @@ describe('ComparisonChart', () => {
 
     expect(realSwatch.style.borderColor || realSwatch.style.backgroundColor).toBeTruthy();
     expect(realSwatch.getAttribute('data-dashed')).toBe('false');
-    expect(whatIfSwatch.getAttribute('data-dashed')).toBe('true');
+    expect(realSwatch.getAttribute('data-shape')).toBe('circle');
+    expect(whatIfSwatch.getAttribute('data-dashed')).toBe('false');
+    expect(whatIfSwatch.getAttribute('data-shape')).toBe('square');
     expect(realPath.getAttribute('stroke')).toBeTruthy();
     expect(whatIfPath.getAttribute('stroke')).toBeTruthy();
+  });
+
+  it('keeps the two lines distinguishable by marker shape alone, independent of color', () => {
+    const { container } = renderWithResult();
+
+    const realDots = container.querySelectorAll('circle.recharts-dot');
+    const whatIfMarkers = container.querySelectorAll('[data-testid="whatif-marker"]');
+
+    expect(realDots.length).toBeGreaterThan(0);
+    expect(whatIfMarkers.length).toBeGreaterThan(0);
+    expect(container.querySelector('circle.recharts-dot')?.tagName.toLowerCase()).toBe('circle');
+    expect(container.querySelector('[data-testid="whatif-marker"]')?.tagName.toLowerCase()).toBe('rect');
   });
 });

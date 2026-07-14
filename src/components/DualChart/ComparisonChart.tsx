@@ -4,6 +4,7 @@
  */
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { DotItemDotProps, ActiveDotProps } from 'recharts';
 import { useChartColors } from '../../hooks/useChartColors';
 import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
 import { useOrientation } from '../../hooks/useOrientation';
@@ -33,6 +34,40 @@ export const ComparisonChart = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, [orientation]);
+
+  // "¿Y si?" line uses a square marker so it stays distinguishable from
+  // "Real" (circle) by shape alone, without relying on color (#22)
+  const renderWhatIfDot = ({ cx, cy }: DotItemDotProps) => {
+    if (cx == null || cy == null) return null;
+    const size = isMobile ? 4 : 5;
+    return (
+      <rect
+        key={`whatif-dot-${cx}-${cy}`}
+        data-testid="whatif-marker"
+        x={cx - size}
+        y={cy - size}
+        width={size * 2}
+        height={size * 2}
+        fill={colors.accent}
+      />
+    );
+  };
+
+  const renderWhatIfActiveDot = ({ cx, cy }: ActiveDotProps) => {
+    if (cx == null || cy == null) return null;
+    const size = isMobile ? 6 : 7;
+    return (
+      <rect
+        key={`whatif-active-dot-${cx}-${cy}`}
+        data-testid="whatif-marker"
+        x={cx - size}
+        y={cy - size}
+        width={size * 2}
+        height={size * 2}
+        fill={colors.accent}
+      />
+    );
+  };
 
   if (!resultadoSimulacion) {
     return (
@@ -72,7 +107,8 @@ export const ComparisonChart = () => {
           <div
             data-testid="legend-swatch-real"
             data-dashed="false"
-            className="w-4 h-0.5"
+            data-shape="circle"
+            className="w-2.5 h-2.5 rounded-full"
             style={{ backgroundColor: colors.neutralLine }}
           ></div>
           <span className="text-dark-text-secondary">Real:</span>
@@ -84,9 +120,10 @@ export const ComparisonChart = () => {
         <div className="flex items-center gap-1.5">
           <div
             data-testid="legend-swatch-whatif"
-            data-dashed="true"
-            className="w-4 h-0 border-t-2 border-dashed"
-            style={{ borderColor: colors.accent }}
+            data-dashed="false"
+            data-shape="square"
+            className="w-2.5 h-2.5"
+            style={{ backgroundColor: colors.accent }}
           ></div>
           <span className="text-dark-text-secondary">¿Y si?:</span>
           <span className="font-bold" style={{ color: colors.accent }}>
@@ -135,7 +172,7 @@ export const ComparisonChart = () => {
             type="monotone"
             dataKey="real"
             stroke={colors.neutralLine}
-            strokeWidth={3}
+            strokeWidth={2}
             isAnimationActive={false}
             dot={{ fill: colors.neutralLine, r: isMobile ? 4 : 5 }}
             activeDot={{ r: isMobile ? 6 : 7 }}
@@ -145,11 +182,10 @@ export const ComparisonChart = () => {
             type="monotone"
             dataKey="whatIf"
             stroke={colors.accent}
-            strokeWidth={3}
-            strokeDasharray="6 4"
+            strokeWidth={2}
             isAnimationActive={false}
-            dot={{ fill: colors.accent, r: isMobile ? 4 : 5 }}
-            activeDot={{ r: isMobile ? 6 : 7 }}
+            dot={renderWhatIfDot}
+            activeDot={renderWhatIfActiveDot}
             name="whatIf"
           />
         </LineChart>
