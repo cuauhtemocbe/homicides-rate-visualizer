@@ -39,7 +39,8 @@ describe('MetricsPanel', () => {
     render(<MetricsPanel />);
 
     expect(screen.getByText('+15.0%')).toBeInTheDocument();
-    expect(screen.getByText(/↑ 3,080/)).toBeInTheDocument();
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('↑');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('3,080');
     expect(screen.getByTestId('diferencia-value')).toHaveClass('text-danger');
   });
 
@@ -56,7 +57,8 @@ describe('MetricsPanel', () => {
     render(<MetricsPanel />);
 
     expect(screen.getByText('-27.0%')).toBeInTheDocument();
-    expect(screen.getByText(/↓ 5,536/)).toBeInTheDocument();
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('↓');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('5,536');
     expect(screen.getByTestId('diferencia-value')).toHaveClass('text-success');
   });
 
@@ -111,7 +113,8 @@ describe('MetricsPanel', () => {
     render(<MetricsPanel />);
 
     expect(screen.getByText('20,536')).toHaveClass('font-display');
-    expect(screen.getByText('23,616')).toHaveClass('font-display');
+    expect(screen.getByTestId('whatif-value')).toHaveClass('font-display');
+    expect(screen.getByTestId('whatif-value').textContent).toContain('23,616');
     expect(screen.getByTestId('diferencia-value')).toHaveClass('font-display');
   });
 
@@ -135,5 +138,91 @@ describe('MetricsPanel', () => {
 
     const realidadContainer = screen.getByText('Realidad Histórica').closest('div');
     expect(realidadContainer?.querySelector('[data-testid="whatif-stamp"]')).toBeNull();
+  });
+});
+
+describe('MetricsPanel rolling digit animation (issue #19)', () => {
+  afterEach(() => {
+    useSimulationStore.setState({ resultadoSimulacion: null });
+    vi.unstubAllGlobals();
+  });
+
+  it('does not animate the digits on the initial result', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    const { container } = render(<MetricsPanel />);
+
+    expect(container.querySelector('.transition-transform')).not.toBeInTheDocument();
+  });
+
+  it('animates the digits when a slot change produces a new result', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    const { container } = render(<MetricsPanel />);
+    expect(container.querySelector('.transition-transform')).not.toBeInTheDocument();
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+      });
+    });
+
+    expect(container.querySelector('.transition-transform')).toBeInTheDocument();
+  });
+
+  it('does not animate the digits when the user prefers reduced motion', () => {
+    mockMatchMedia(true);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    const { container } = render(<MetricsPanel />);
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+      });
+    });
+
+    expect(container.querySelector('.transition-transform')).not.toBeInTheDocument();
+    expect(screen.getByTestId('whatif-value').textContent).toContain('20,000');
+  });
+
+  it('reflects a sign change from positive to negative diferencia with the correct icon and color', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+    expect(screen.getByTestId('diferencia-value')).toHaveClass('text-danger');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('↑');
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 15000, diferencia: -5536, diferenciaPorcentual: -26.96 }
+      });
+    });
+
+    expect(screen.getByTestId('diferencia-value')).toHaveClass('text-success');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('↓');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('5,536');
+  });
+
+  it('settles on the final value after rapid consecutive changes', () => {
+    mockMatchMedia(false);
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    act(() => {
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 18000, diferencia: -5616, diferenciaPorcentual: -23.7 }
+      });
+      useSimulationStore.setState({
+        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+      });
+    });
+
+    expect(screen.getByTestId('whatif-value').textContent).toContain('20,000');
+    expect(screen.getByTestId('diferencia-value').textContent).toContain('3,616');
   });
 });

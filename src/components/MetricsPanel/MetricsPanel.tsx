@@ -7,6 +7,7 @@ import { useSimulationStore } from '../../store/useSimulationStore';
 import { VALOR_REAL_FINAL } from '../../data/historico.data';
 import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import { OdometerValue } from './OdometerValue';
 
 const HIGHLIGHT_DURATION_MS = 600;
 
@@ -42,6 +43,11 @@ export const MetricsPanel = () => {
   // diferencia < 0 means LESS homicides in What-If (good) = success
   const diferenciaColor = diferencia >= 0 ? 'text-danger' : 'text-success';
   const diferenciaIcon = diferencia >= 0 ? '↑' : '↓';
+
+  // Roll digits on recalculation only — not on the initial result, and not
+  // for users who prefer reduced motion (reuses the same guards as the
+  // panel highlight above)
+  const animateDigits = hasShownResultBefore.current && !prefersReducedMotion;
 
   return (
     <div
@@ -83,8 +89,11 @@ export const MetricsPanel = () => {
             Hipotético
           </span>
           <p className="text-dark-text-secondary text-sm mb-2">Simulación ¿Y si?</p>
-          <p className="font-display font-bold text-dark-text text-4xl tracking-wide">
-            {valorFinal.toLocaleString('es-MX')}
+          <p
+            data-testid="whatif-value"
+            className="font-display font-bold text-dark-text text-4xl tracking-wide"
+          >
+            <OdometerValue value={valorFinal} animate={animateDigits} />
           </p>
           <p className="text-dark-text-secondary text-xs mt-1">homicidios</p>
         </div>
@@ -93,7 +102,7 @@ export const MetricsPanel = () => {
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Diferencia</p>
           <p data-testid="diferencia-value" className={`font-display font-bold text-4xl tracking-wide ${diferenciaColor}`}>
-            {diferenciaIcon} {Math.abs(diferencia).toLocaleString('es-MX')}
+            {diferenciaIcon} <OdometerValue value={Math.abs(diferencia)} animate={animateDigits} />
           </p>
           <p className={`text-sm mt-1 ${diferenciaColor}`}>
             {diferencia >= 0 ? '+' : ''}{diferenciaPorcentual.toFixed(1)}%
