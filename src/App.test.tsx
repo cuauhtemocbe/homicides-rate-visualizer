@@ -70,3 +70,38 @@ describe('App typography (issue #17: distinct display typography)', () => {
     expect(subtitle).not.toHaveClass('font-display');
   });
 });
+
+describe('App layout order (issue #21: metrics-first layout)', () => {
+  beforeAll(() => {
+    HTMLDialogElement.prototype.showModal = vi.fn();
+    HTMLDialogElement.prototype.close = vi.fn();
+  });
+
+  beforeEach(() => {
+    localStorage.setItem('mx-simulator:has-visited', 'true');
+  });
+
+  it('renders the results comparison panel before the chart', () => {
+    render(<App />);
+
+    const metricsPanel = screen.getByTestId('metrics-panel');
+    const chartArea = screen.getByRole('status', { name: 'Cargando gráfica...' });
+
+    expect(
+      metricsPanel.compareDocumentPosition(chartArea) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+  });
+
+  it('renders the simulation controls after the chart and the results panel', () => {
+    render(<App />);
+
+    const main = screen.getByRole('main');
+    const metricsPanel = screen.getByTestId('metrics-panel');
+    const resetButton = screen.getByTestId('reset-button');
+
+    expect(
+      metricsPanel.compareDocumentPosition(resetButton) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(main.contains(resetButton)).toBe(true);
+  });
+});

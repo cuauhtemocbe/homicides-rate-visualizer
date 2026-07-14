@@ -123,4 +123,17 @@ describe('MetricsPanel', () => {
     expect(screen.getByText('Realidad Histórica')).not.toHaveClass('font-display');
     expect(screen.getAllByText('homicidios')[0]).not.toHaveClass('font-display');
   });
+
+  it('marks the "Simulación ¿Y si?" figure with a stamp badge distinguishing it from the historical value (issue #21)', () => {
+    useSimulationStore.setState({ resultadoSimulacion: baseResultado });
+
+    render(<MetricsPanel />);
+
+    const stamp = screen.getByTestId('whatif-stamp');
+    expect(stamp).toBeInTheDocument();
+    expect(stamp.className).toMatch(/rotate/);
+
+    const realidadContainer = screen.getByText('Realidad Histórica').closest('div');
+    expect(realidadContainer?.querySelector('[data-testid="whatif-stamp"]')).toBeNull();
+  });
 });

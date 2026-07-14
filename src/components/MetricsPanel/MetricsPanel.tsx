@@ -69,7 +69,19 @@ export const MetricsPanel = () => {
         </div>
 
         {/* What-If */}
-        <div className="text-center">
+        <div className="text-center relative">
+          <span
+            data-testid="whatif-stamp"
+            aria-hidden="true"
+            className="
+              absolute -top-3 right-2 md:right-6
+              -rotate-12 select-none pointer-events-none
+              text-[10px] font-bold uppercase tracking-widest text-accent
+              border-2 border-accent rounded-sm px-1.5 py-0.5
+            "
+          >
+            Hipotético
+          </span>
           <p className="text-dark-text-secondary text-sm mb-2">Simulación ¿Y si?</p>
           <p className="font-display font-bold text-dark-text text-4xl tracking-wide">
             {valorFinal.toLocaleString('es-MX')}

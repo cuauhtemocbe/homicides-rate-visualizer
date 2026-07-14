@@ -159,14 +159,14 @@ function App() {
 
         {/* Main Content */}
         <main id="main-content" className="space-y-6" role="main">
+          {/* Panel de Métricas: el resultado primero, antes del detalle */}
+          <MetricsPanel />
+
           {/* Dualidad Visual: Real vs What-If */}
           <DualChart />
 
           {/* Controles de Simulación */}
           <SimulationControls />
-
-          {/* Panel de Métricas */}
-          <MetricsPanel />
 
           {/* Footer con Fuentes */}
           <DataSourceFooter />
