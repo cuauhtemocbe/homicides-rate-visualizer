@@ -83,9 +83,9 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
         onClick={() => setIsVisible(true)}
         className="
           inline-flex items-center justify-center
-          w-5 h-5 rounded-full
-          bg-accent/20 text-accent
-          hover:bg-accent hover:text-white
+          w-5 h-5 rounded-sm
+          border-2 border-accent text-accent bg-transparent
+          hover:bg-accent hover:text-dark-card
           transition-all duration-200
           focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
           text-xs font-bold
@@ -102,8 +102,8 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
           role="tooltip"
           className={`
             absolute z-50 ${positionClasses[position]}
-            px-4 py-3 rounded-lg
-            bg-dark-card border border-dark-border
+            px-4 py-3 rounded-sm
+            bg-dark-card border-2 border-dark-border
             text-dark-text text-sm leading-relaxed
             shadow-lg
           `}
@@ -115,10 +115,10 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
             className={`
               absolute w-2 h-2 bg-dark-card border-dark-border
               transform rotate-45
-              ${position === 'top' ? 'bottom-[-5px] left-1/2 -translate-x-1/2 border-b border-r' : ''}
-              ${position === 'bottom' ? 'top-[-5px] left-1/2 -translate-x-1/2 border-t border-l' : ''}
-              ${position === 'left' ? 'right-[-5px] top-1/2 -translate-y-1/2 border-r border-t' : ''}
-              ${position === 'right' ? 'left-[-5px] top-1/2 -translate-y-1/2 border-l border-b' : ''}
+              ${position === 'top' ? 'bottom-[-5px] left-1/2 -translate-x-1/2 border-b-2 border-r-2' : ''}
+              ${position === 'bottom' ? 'top-[-5px] left-1/2 -translate-x-1/2 border-t-2 border-l-2' : ''}
+              ${position === 'left' ? 'right-[-5px] top-1/2 -translate-y-1/2 border-r-2 border-t-2' : ''}
+              ${position === 'right' ? 'left-[-5px] top-1/2 -translate-y-1/2 border-l-2 border-b-2' : ''}
             `}
           />
         </div>
