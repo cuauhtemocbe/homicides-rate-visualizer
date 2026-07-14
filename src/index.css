@@ -9,10 +9,12 @@
   --color-dark-text-secondary: var(--color-text-secondary);
   --color-dark-border: var(--color-border);
 
-  /* Semantic colors for homicide context */
-  --color-danger: #EF4444;  /* Red: increase in homicides (bad) */
-  --color-success: #10B981; /* Green: decrease in homicides (good) */
-  --color-accent: #3B82F6;
+  /* Semantic colors for homicide context. Accent is an institutional ochre,
+     kept distinct from danger/success in both themes (#20) so it can never
+     be misread as the danger/success color language (#15). */
+  --color-danger: var(--color-danger-theme);
+  --color-success: var(--color-success-theme);
+  --color-accent: var(--color-accent-theme);
 
   /* Display face for the title and headline figures: a condensed,
      stencilled grotesk built for large at-a-glance numerals — reads as an
@@ -33,22 +35,28 @@
   border-width: 0;
 }
 
-/* Light Theme (default) */
+/* Light Theme (default) - institutional bulletin identity (#20) */
 :root {
-  --color-bg: #F5F5F5;
-  --color-card: #FFFFFF;
-  --color-text: #1F2937;
-  --color-text-secondary: #6B7280;
-  --color-border: #E5E7EB;
+  --color-bg: #F2EEE3;
+  --color-card: #FBF9F2;
+  --color-text: #241F16;
+  --color-text-secondary: #6B6152;
+  --color-border: #DDD5C0;
+  --color-danger-theme: #A32419;
+  --color-success-theme: #3D6642;
+  --color-accent-theme: #96751C;
 }
 
-/* Dark Theme - WCAG AA compliant colors */
+/* Dark Theme - WCAG AA compliant colors, institutional bulletin identity (#20) */
 .dark {
-  --color-bg: #121212;
-  --color-card: #1E1E1E;
-  --color-text: #E0E0E0;
-  --color-text-secondary: #BDBDBD; /* Improved from #B0B0B0 for better contrast */
-  --color-border: #2A2A2A;
+  --color-bg: #17150F;
+  --color-card: #221E16;
+  --color-text: #EDE6D8;
+  --color-text-secondary: #A69C87;
+  --color-border: #38321F;
+  --color-danger-theme: #B3261E;
+  --color-success-theme: #4C7A51;
+  --color-accent-theme: #C9A227;
 }
 
 /* Modal entrance */

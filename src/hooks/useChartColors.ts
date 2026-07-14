@@ -27,47 +27,47 @@ export const useChartColors = () => {
   if (isDark) {
     return {
       // Colores de barras
-      positiveBar: '#EF4444',    // Rojo para crecimiento
-      negativeBar: '#10B981',    // Verde para reducción
+      positiveBar: '#B3261E',    // Rojo para crecimiento
+      negativeBar: '#4C7A51',    // Verde para reducción
 
       // Colores de UI
-      gridColor: '#2A2A2A',      // Grid lines
-      textColor: '#B0B0B0',      // Texto en gráficas
-      axisColor: '#E0E0E0',      // Ejes principales
+      gridColor: '#38321F',      // Grid lines
+      textColor: '#A69C87',      // Texto en gráficas
+      axisColor: '#EDE6D8',      // Ejes principales
 
       // Tooltips
-      tooltipBg: '#1E1E1E',      // Fondo de tooltip
-      tooltipBorder: '#3B82F6',  // Borde de tooltip
-      tooltipText: '#E0E0E0',    // Texto en tooltip
+      tooltipBg: '#221E16',      // Fondo de tooltip
+      tooltipBorder: '#C9A227',  // Borde de tooltip
+      tooltipText: '#EDE6D8',    // Texto en tooltip
 
       // Estados
-      accent: '#3B82F6',         // Color de acento
-      neutralLine: '#B0B0B0',    // Línea "Real": neutral, sin significado bueno/malo
-      background: '#121212',     // Fondo general
-      cardBg: '#1E1E1E'          // Fondo de cards
+      accent: '#C9A227',         // Color de acento (ocre institucional)
+      neutralLine: '#A69C87',    // Línea "Real": neutral, sin significado bueno/malo
+      background: '#17150F',     // Fondo general
+      cardBg: '#221E16'          // Fondo de cards
     };
   } else {
     // Light theme colors
     return {
       // Colores de barras
-      positiveBar: '#EF4444',    // Rojo para crecimiento
-      negativeBar: '#10B981',    // Verde para reducción
+      positiveBar: '#A32419',    // Rojo para crecimiento
+      negativeBar: '#3D6642',    // Verde para reducción
 
       // Colores de UI
-      gridColor: '#E5E7EB',      // Grid lines
-      textColor: '#6B7280',      // Texto en gráficas
-      axisColor: '#1F2937',      // Ejes principales
+      gridColor: '#DDD5C0',      // Grid lines
+      textColor: '#6B6152',      // Texto en gráficas
+      axisColor: '#241F16',      // Ejes principales
 
       // Tooltips
-      tooltipBg: '#FFFFFF',      // Fondo de tooltip
-      tooltipBorder: '#3B82F6',  // Borde de tooltip
-      tooltipText: '#1F2937',    // Texto en tooltip
+      tooltipBg: '#FBF9F2',      // Fondo de tooltip
+      tooltipBorder: '#96751C',  // Borde de tooltip
+      tooltipText: '#241F16',    // Texto en tooltip
 
       // Estados
-      accent: '#3B82F6',         // Color de acento
-      neutralLine: '#6B7280',    // Línea "Real": neutral, sin significado bueno/malo
-      background: '#F5F5F5',     // Fondo general
-      cardBg: '#FFFFFF'          // Fondo de cards
+      accent: '#96751C',         // Color de acento (ocre institucional)
+      neutralLine: '#6B6152',    // Línea "Real": neutral, sin significado bueno/malo
+      background: '#F2EEE3',     // Fondo general
+      cardBg: '#FBF9F2'          // Fondo de cards
     };
   }
 };
