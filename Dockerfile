@@ -38,6 +38,10 @@ COPY --from=builder --chown=nodeuser:nodeuser /app/dist ./dist
 # Install a simple HTTP server
 RUN pnpm add -g serve
 
+# npm ships bundled with the base image but this project only uses pnpm;
+# removing it drops its vulnerable transitive deps (tar, undici CVEs) from the final image
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
+
 USER nodeuser
 
 EXPOSE 8080

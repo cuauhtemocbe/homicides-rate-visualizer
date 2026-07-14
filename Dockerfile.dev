@@ -3,6 +3,10 @@ FROM node:24-alpine
 # Install system dependencies
 RUN apk add --no-cache git bash wget curl
 
+# npm ships bundled with the base image but this project only uses pnpm (installed via
+# the standalone script below); removing it drops its vulnerable transitive deps (tar, undici CVEs)
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
+
 # Create pnpm store directory with proper permissions before switching users
 RUN mkdir -p /home/node/.pnpm-store && chown -R node:node /home/node/.pnpm-store
 
