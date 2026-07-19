@@ -1,10 +1,12 @@
 # ---------- Builder ----------
-FROM node:24-alpine AS builder
+FROM node:26-alpine@sha256:e88a35be04478413b7c71c455cd9865de9b9360e1f43456be5951032d7ac1a66 AS builder
 
 RUN apk add --no-cache git
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@11.12.0 --activate
+# node:26-alpine no trae corepack embebido (a diferencia de node:24); se instala vía npm,
+# que sí sigue empaquetado, antes de usarlo para activar el pnpm pineado
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@11.12.0 --activate
 
 WORKDIR /app
 
@@ -16,7 +18,7 @@ COPY . .
 RUN pnpm run typecheck && pnpm run build
 
 # ---------- Production ----------
-FROM node:24-alpine AS production
+FROM node:26-alpine@sha256:e88a35be04478413b7c71c455cd9865de9b9360e1f43456be5951032d7ac1a66 AS production
 
 RUN apk add --no-cache curl
 ENV NODE_ENV=production
@@ -24,7 +26,9 @@ ENV PNPM_HOME="/home/node/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV PORT=8080
 
-RUN corepack enable && corepack prepare pnpm@11.12.0 --activate && \
+# node:26-alpine no trae corepack embebido (a diferencia de node:24); se instala vía npm,
+# que sí sigue empaquetado, antes de usarlo para activar el pnpm pineado
+RUN npm install -g corepack@latest && corepack enable && corepack prepare pnpm@11.12.0 --activate && \
     pnpm config set global-bin-dir "$PNPM_HOME"
 
 # Create user without privileges
