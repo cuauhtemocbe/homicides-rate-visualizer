@@ -2,11 +2,11 @@
  * Tests for ComparisonChart
  */
 
-import { describe, it, expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { ComparisonChart } from './ComparisonChart';
-import { useSimulationStore } from '../../store/useSimulationStore';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import type { ResultadoSimulacion } from '../../data/types';
+import { useSimulationStore } from '../../store/useSimulationStore';
+import { ComparisonChart } from './ComparisonChart';
 
 describe('ComparisonChart', () => {
   // Recharts' ResponsiveContainer measures its DOM node via getBoundingClientRect,
@@ -18,7 +18,7 @@ describe('ComparisonChart', () => {
         observe() {}
         unobserve() {}
         disconnect() {}
-      }
+      },
     );
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
       width: 800,
@@ -29,7 +29,7 @@ describe('ComparisonChart', () => {
       right: 800,
       x: 0,
       y: 0,
-      toJSON: () => {}
+      toJSON: () => {},
     } as DOMRect);
   });
 
@@ -55,7 +55,7 @@ describe('ComparisonChart', () => {
       valores: [10452, 25963, 36685, 29752, 15000],
       valorFinal: 15000,
       diferencia: -5536,
-      diferenciaPorcentual: -26.96
+      diferenciaPorcentual: -26.96,
     };
     useSimulationStore.setState({ resultadoSimulacion: resultado });
 
@@ -70,8 +70,8 @@ describe('ComparisonChart', () => {
 
     expect(
       screen.getByRole('img', {
-        name: /comparando la realidad histórica con el escenario ¿y si\?/i
-      })
+        name: /comparando la realidad histórica con el escenario ¿y si\?/i,
+      }),
     ).toBeInTheDocument();
   });
 
@@ -81,7 +81,7 @@ describe('ComparisonChart', () => {
       valores: [10452, 25963, 36685, 29752, 15000],
       valorFinal: 15000,
       diferencia: -5536,
-      diferenciaPorcentual: -26.96
+      diferenciaPorcentual: -26.96,
     };
     useSimulationStore.setState({ resultadoSimulacion: resultado });
     return render(<ComparisonChart />);
@@ -119,7 +119,9 @@ describe('ComparisonChart', () => {
 
     expect(realDots.length).toBeGreaterThan(0);
     expect(whatIfMarkers.length).toBeGreaterThan(0);
-    whatIfMarkers.forEach((marker) => expect(marker.tagName.toLowerCase()).not.toBe('circle'));
+    whatIfMarkers.forEach((marker) => {
+      expect(marker.tagName.toLowerCase()).not.toBe('circle');
+    });
   });
 
   it('renders legend swatches reflecting marker shape instead of a dash pattern', () => {
@@ -147,6 +149,8 @@ describe('ComparisonChart', () => {
     expect(realDots.length).toBeGreaterThan(0);
     expect(whatIfMarkers.length).toBeGreaterThan(0);
     expect(container.querySelector('circle.recharts-dot')?.tagName.toLowerCase()).toBe('circle');
-    expect(container.querySelector('[data-testid="whatif-marker"]')?.tagName.toLowerCase()).toBe('rect');
+    expect(container.querySelector('[data-testid="whatif-marker"]')?.tagName.toLowerCase()).toBe(
+      'rect',
+    );
   });
 });

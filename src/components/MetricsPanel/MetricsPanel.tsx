@@ -3,10 +3,10 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { useSimulationStore } from '../../store/useSimulationStore';
 import { VALOR_REAL_FINAL } from '../../data/historico.data';
-import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import { useSimulationStore } from '../../store/useSimulationStore';
+import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 import { OdometerValue } from './OdometerValue';
 
 const HIGHLIGHT_DURATION_MS = 600;
@@ -55,9 +55,7 @@ export const MetricsPanel = () => {
       className={`bg-dark-card rounded-lg p-6 ${isHighlighting ? 'animate-metrics-highlight' : ''}`}
     >
       <div className="flex items-center justify-center gap-2 mb-6">
-        <h3 className="text-lg font-bold text-dark-text">
-          Comparación de Resultados
-        </h3>
+        <h3 className="text-lg font-bold text-dark-text">Comparación de Resultados</h3>
         <InfoTooltip
           content="Compara el resultado final de tu simulación con la realidad histórica. Verde = menos homicidios (mejor), Rojo = más homicidios (peor)."
           position="bottom"
@@ -101,11 +99,15 @@ export const MetricsPanel = () => {
         {/* Diferencia */}
         <div className="text-center">
           <p className="text-dark-text-secondary text-sm mb-2">Diferencia</p>
-          <p data-testid="diferencia-value" className={`font-display font-bold text-4xl tracking-wide ${diferenciaColor}`}>
+          <p
+            data-testid="diferencia-value"
+            className={`font-display font-bold text-4xl tracking-wide ${diferenciaColor}`}
+          >
             {diferenciaIcon} <OdometerValue value={Math.abs(diferencia)} animate={animateDigits} />
           </p>
           <p className={`text-sm mt-1 ${diferenciaColor}`}>
-            {diferencia >= 0 ? '+' : ''}{diferenciaPorcentual.toFixed(1)}%
+            {diferencia >= 0 ? '+' : ''}
+            {diferenciaPorcentual.toFixed(1)}%
           </p>
         </div>
       </div>

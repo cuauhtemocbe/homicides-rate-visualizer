@@ -204,9 +204,11 @@ pnpm test:coverage
 pnpm test
 ```
 
-**Coverage Targets**:
-- SimulationEngine: >95%
-- Componentes: >80%
+**Coverage Gate** (enforced in `vite.config.ts` — `pnpm test:coverage` fails below these):
+- Global: 85% statements / 75% branches / 85% functions / 85% lines
+- `src/engine/**` (lógica de negocio pura, ej. `SimulationEngine`): 100% statements / functions / lines
+
+Los umbrales globales se fijaron unos puntos por debajo del baseline medido (90.36% stmts / 80.71% branches / 89.62% funcs / 92.59% lines al 2026-07-18) para dejar margen sin volverse aspiracionales. `src/engine/` lleva un umbral más alto que el resto por ser lógica de negocio pura sin dependencias de UI — ya está en 100% hoy y debe mantenerse así.
 
 ---
 

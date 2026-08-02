@@ -50,13 +50,18 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
       const triggerCenterX = containerRect.left + containerRect.width / 2;
       const naturalWidth = panel.getBoundingClientRect().width;
       const width = getClampedTooltipWidth(naturalWidth, viewportWidth, VIEWPORT_MARGIN);
-      const delta = getTooltipHorizontalDelta(triggerCenterX, width, viewportWidth, VIEWPORT_MARGIN);
+      const delta = getTooltipHorizontalDelta(
+        triggerCenterX,
+        width,
+        viewportWidth,
+        VIEWPORT_MARGIN,
+      );
       const isClamped = width < naturalWidth;
 
       setPanelStyle({
         minWidth: isClamped ? undefined : '20rem',
         width: isClamped ? `${width}px` : undefined,
-        transform: `translateX(calc(-50% + ${delta}px))`
+        transform: `translateX(calc(-50% + ${delta}px))`,
       });
     };
 
@@ -69,7 +74,7 @@ export const InfoTooltip = ({ content, position = 'top', className = '' }: Props
     top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
     bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
     left: 'right-full top-1/2 -translate-y-1/2 mr-2',
-    right: 'left-full top-1/2 -translate-y-1/2 ml-2'
+    right: 'left-full top-1/2 -translate-y-1/2 ml-2',
   };
 
   return (

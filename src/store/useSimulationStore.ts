@@ -5,16 +5,16 @@
  */
 
 import { create } from 'zustand';
-import { PRESIDENTES } from '../data/presidentes.data';
 import { HISTORICO_REAL } from '../data/historico.data';
-import { SimulationEngine } from '../engine/SimulationEngine';
+import { PRESIDENTES } from '../data/presidentes.data';
 import type {
   Presidente,
+  PresidenteId,
   RegistroHistorico,
-  SimulacionSlots,
   ResultadoSimulacion,
-  PresidenteId
+  SimulacionSlots,
 } from '../data/types';
+import { SimulationEngine } from '../engine/SimulationEngine';
 
 interface SimulationState {
   // Data
@@ -73,6 +73,6 @@ export const useSimulationStore = create<SimulationState>((set, get) => {
     // Inicializar (llamar al montar la app)
     inicializar: () => {
       get().recalcularSimulacion();
-    }
+    },
   };
 });

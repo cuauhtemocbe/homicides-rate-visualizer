@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { getClampedTooltipWidth, getTooltipHorizontalDelta } from './tooltipPosition';
 
 const MARGIN = 8;
@@ -19,7 +19,7 @@ describe('getTooltipHorizontalDelta', () => {
     { width: 390, edge: 'right' as const, triggerCenterX: 380 },
     { width: 320, edge: 'left' as const, triggerCenterX: 10 },
   ])(
-    'keeps the tooltip bounding box within a ${width}px viewport near the $edge edge',
+    'keeps the tooltip bounding box within a $widthpx viewport near the $edge edge',
     ({ width, triggerCenterX }) => {
       const tooltipWidth = getClampedTooltipWidth(320, width, MARGIN);
       const delta = getTooltipHorizontalDelta(triggerCenterX, tooltipWidth, width, MARGIN);
@@ -30,7 +30,7 @@ describe('getTooltipHorizontalDelta', () => {
 
       expect(finalLeft).toBeGreaterThanOrEqual(MARGIN - 0.001);
       expect(finalRight).toBeLessThanOrEqual(width - MARGIN + 0.001);
-    }
+    },
   );
 
   it('does not shift a tooltip that is already centered and fits', () => {

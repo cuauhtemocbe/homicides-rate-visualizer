@@ -25,6 +25,14 @@ if ! pnpm run typecheck; then
 fi
 echo "✅ TypeScript type checking passed"
 
+# Run linter
+echo "🧹 Running linter..."
+if ! pnpm run lint; then
+    echo "❌ Linting failed"
+    exit 1
+fi
+echo "✅ Linting passed"
+
 # Run tests
 echo "🧪 Running tests..."
 if ! pnpm test:run; then

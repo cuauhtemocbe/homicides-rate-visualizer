@@ -2,9 +2,9 @@
  * Tests for design tokens declared in index.css (issues #17, #20)
  */
 
-import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { describe, expect, it } from 'vitest';
 
 const css = readFileSync(resolve(__dirname, './index.css'), 'utf-8');
 
@@ -45,7 +45,7 @@ describe('institutional bulletin palette (#20)', () => {
     border: extractToken(rootBlock, '--color-border'),
     accent: extractToken(rootBlock, '--color-accent-theme'),
     danger: extractToken(rootBlock, '--color-danger-theme'),
-    success: extractToken(rootBlock, '--color-success-theme')
+    success: extractToken(rootBlock, '--color-success-theme'),
   };
 
   const darkTokens = {
@@ -56,7 +56,7 @@ describe('institutional bulletin palette (#20)', () => {
     border: extractToken(darkBlock, '--color-border'),
     accent: extractToken(darkBlock, '--color-accent-theme'),
     danger: extractToken(darkBlock, '--color-danger-theme'),
-    success: extractToken(darkBlock, '--color-success-theme')
+    success: extractToken(darkBlock, '--color-success-theme'),
   };
 
   it('resolves the dark accent token to the institutional ochre tone', () => {
@@ -84,7 +84,7 @@ describe('institutional bulletin palette (#20)', () => {
   const relativeLuminance = (hex: string) => {
     const [r, g, b] = [hex.slice(1, 3), hex.slice(3, 5), hex.slice(5, 7)].map((h) => {
       const c = parseInt(h, 16) / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
     });
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
@@ -98,11 +98,14 @@ describe('institutional bulletin palette (#20)', () => {
 
   it.each([
     ['light', lightTokens],
-    ['dark', darkTokens]
-  ] as const)('meets WCAG AA body text contrast (>= 4.5:1) on bg and card in %s theme', (_name, tokens) => {
-    expect(contrastRatio(tokens.text, tokens.bg)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(tokens.text, tokens.card)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(tokens.textSecondary, tokens.bg)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(tokens.textSecondary, tokens.card)).toBeGreaterThanOrEqual(4.5);
-  });
+    ['dark', darkTokens],
+  ] as const)(
+    'meets WCAG AA body text contrast (>= 4.5:1) on bg and card in %s theme',
+    (_name, tokens) => {
+      expect(contrastRatio(tokens.text, tokens.bg)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(tokens.text, tokens.card)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(tokens.textSecondary, tokens.bg)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(tokens.textSecondary, tokens.card)).toBeGreaterThanOrEqual(4.5);
+    },
+  );
 });

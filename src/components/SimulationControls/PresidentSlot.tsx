@@ -2,7 +2,7 @@
  * Selector de Presidente para un Slot
  */
 
-import { PRESIDENTES, ORDEN_HISTORICO } from '../../data/presidentes.data';
+import { ORDEN_HISTORICO, PRESIDENTES } from '../../data/presidentes.data';
 import type { PresidenteId } from '../../data/types';
 
 interface Props {
@@ -13,7 +13,13 @@ interface Props {
   layout?: 'vertical' | 'horizontal';
 }
 
-export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange, layout = 'vertical' }: Props) => {
+export const PresidentSlot = ({
+  slotNumber,
+  currentPresident,
+  disabled,
+  onChange,
+  layout = 'vertical',
+}: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange && !disabled) {
       onChange(e.target.value as PresidenteId);
@@ -23,10 +29,7 @@ export const PresidentSlot = ({ slotNumber, currentPresident, disabled, onChange
   if (layout === 'horizontal') {
     return (
       <>
-        <label
-          htmlFor={`slot-select-${slotNumber}`}
-          className="text-dark-text text-sm font-medium"
-        >
+        <label htmlFor={`slot-select-${slotNumber}`} className="text-dark-text text-sm font-medium">
           Sexenio {slotNumber + 1}
           {disabled && (
             <span className="block text-xs text-dark-text-secondary italic mt-0.5">

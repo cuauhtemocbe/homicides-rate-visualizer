@@ -2,8 +2,8 @@
  * Tests for OdometerValue (issue #19: rolling digit animation)
  */
 
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { OdometerValue } from './OdometerValue';
 
 describe('OdometerValue', () => {

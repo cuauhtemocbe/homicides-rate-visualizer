@@ -2,8 +2,8 @@
  * Tests for InfoTooltip (issue #25: redesigned trigger and panel)
  */
 
-import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { InfoTooltip } from './InfoTooltip';
 
 describe('InfoTooltip', () => {
@@ -62,8 +62,8 @@ describe('InfoTooltip', () => {
     render(
       <div>
         <InfoTooltip content="Texto de ayuda" />
-        <button>Fuera</button>
-      </div>
+        <button type="button">Fuera</button>
+      </div>,
     );
 
     const trigger = screen.getByRole('button', { name: 'Más información' });

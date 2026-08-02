@@ -57,10 +57,10 @@ export const useShareSimulation = () => {
       if (s3) setSlot(3, s3);
       if (s4) setSlot(4, s4);
     }
-  }, []); // Solo ejecutar en mount
+  }, [setSlot]); // Solo ejecutar en mount (setSlot es una referencia estable de Zustand)
 
   return {
     generateShareUrl,
-    copyShareUrl
+    copyShareUrl,
   };
 };

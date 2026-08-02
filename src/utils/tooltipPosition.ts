@@ -4,7 +4,7 @@
 export function getClampedTooltipWidth(
   naturalWidth: number,
   viewportWidth: number,
-  margin: number
+  margin: number,
 ): number {
   return Math.min(naturalWidth, viewportWidth - margin * 2);
 }
@@ -17,7 +17,7 @@ export function getTooltipHorizontalDelta(
   triggerCenterX: number,
   tooltipWidth: number,
   viewportWidth: number,
-  margin: number
+  margin: number,
 ): number {
   const naturalLeft = triggerCenterX - tooltipWidth / 2;
   const maxLeft = Math.max(margin, viewportWidth - tooltipWidth - margin);

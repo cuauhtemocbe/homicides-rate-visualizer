@@ -2,8 +2,8 @@
  * Tests for LoadingIndicator (issue #18: on-brand loading states)
  */
 
-import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { LoadingIndicator } from './LoadingIndicator';
 
 const mockMatchMedia = (matches: boolean) => {
@@ -11,7 +11,7 @@ const mockMatchMedia = (matches: boolean) => {
     matches,
     media: query,
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn()
+    removeEventListener: vi.fn(),
   }));
 };
 

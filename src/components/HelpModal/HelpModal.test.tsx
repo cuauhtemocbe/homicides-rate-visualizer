@@ -2,8 +2,8 @@
  * Tests for HelpModal (issue #23: replace emoji glyphs with icons)
  */
 
-import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { HelpModal } from './HelpModal';
 
 const EMOJI_PATTERN = /👋|❓|🎯|🎰|🧮|📊|💡|⟲/u;
@@ -44,7 +44,7 @@ describe('HelpModal', () => {
       /Sistema de Slots/,
       /Algoritmo de Cascada/,
       /Cómo interpretar los gráficos/,
-      /Tips de uso/
+      /Tips de uso/,
     ].map((name) => screen.getByRole('heading', { name }));
 
     headings.forEach((heading) => {

@@ -2,8 +2,8 @@
  * Tests for PresidentSlot
  */
 
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { PresidentSlot } from './PresidentSlot';
 
 describe('PresidentSlot', () => {
@@ -16,7 +16,7 @@ describe('PresidentSlot', () => {
     const describedById = select.getAttribute('aria-describedby');
     expect(describedById).toBe('slot-0-disabled');
     expect(document.getElementById(describedById!)).toHaveTextContent(
-      'Fijo - Punto de partida histórico'
+      'Fijo - Punto de partida histórico',
     );
   });
 });

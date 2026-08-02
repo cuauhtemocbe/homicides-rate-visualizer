@@ -3,17 +3,25 @@
  * Muestra ambas tendencias en un solo gráfico de líneas
  */
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import type { DotItemDotProps, ActiveDotProps } from 'recharts';
-import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator';
-import { useChartColors } from '../../hooks/useChartColors';
-import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
-import { useOrientation } from '../../hooks/useOrientation';
-import { useSimulationStore } from '../../store/useSimulationStore';
+import { useEffect, useState } from 'react';
+import type { ActiveDotProps, DotItemDotProps } from 'recharts';
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { HISTORICO_REAL } from '../../data/historico.data';
 import { PRESIDENTES } from '../../data/presidentes.data';
+import { useChartColors } from '../../hooks/useChartColors';
+import { useOrientation } from '../../hooks/useOrientation';
+import { useResponsiveChartHeight } from '../../hooks/useResponsiveChartHeight';
+import { useSimulationStore } from '../../store/useSimulationStore';
 import { formatNumberCompact } from '../../utils/formatNumber';
-import { useState, useEffect } from 'react';
+import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator';
 
 export const ComparisonChart = () => {
   const colors = useChartColors();
@@ -83,7 +91,7 @@ export const ComparisonChart = () => {
     sexenio: `Sexenio ${index + 1}`,
     real: registro.homicidios,
     whatIf: resultadoSimulacion.valores[index],
-    presidente: PRESIDENTES[registro.presidente].nombreCorto
+    presidente: PRESIDENTES[registro.presidente].nombreCorto,
   }));
 
   return (
@@ -95,8 +103,19 @@ export const ComparisonChart = () => {
       {/* Mensaje sugerencia landscape mode */}
       {showLandscapeTip && (
         <div className="mb-3 text-center text-xs text-dark-text-secondary bg-dark-card-hover rounded p-2 flex items-center justify-center gap-2">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+            />
           </svg>
           <span>Rota tu dispositivo para mejor visualización</span>
         </div>
@@ -133,64 +152,73 @@ export const ComparisonChart = () => {
         </div>
       </div>
 
-      <div role="img" aria-label="Gráfico de líneas comparando la realidad histórica con el escenario ¿Y si? a través de los 5 sexenios">
+      <div
+        role="img"
+        aria-label="Gráfico de líneas comparando la realidad histórica con el escenario ¿Y si? a través de los 5 sexenios"
+      >
         <ResponsiveContainer width="100%" height={chartHeight}>
-        <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
-          <XAxis
-            dataKey="sexenio"
-            stroke={colors.textColor}
-            style={{ fontSize: isMobile ? '10px' : '12px' }}
-            angle={isMobile ? -45 : 0}
-            textAnchor={isMobile ? 'end' : 'middle'}
-            height={isMobile ? 60 : 30}
-          />
-          <YAxis
-            stroke={colors.textColor}
-            style={{ fontSize: isMobile ? '10px' : '12px' }}
-            label={{ value: 'Homicidios', angle: -90, position: 'insideLeft', fill: colors.textColor, style: { fontSize: isMobile ? '10px' : '12px' } }}
-            tickFormatter={formatNumberCompact}
-          />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: colors.tooltipBg,
-              border: `1px solid ${colors.tooltipBorder}`,
-              borderRadius: '4px',
-              color: colors.tooltipText,
-              maxWidth: isMobile ? '140px' : '200px',
-              fontSize: isMobile ? '11px' : '14px',
-              padding: isMobile ? '6px 8px' : '8px 12px'
-            }}
-            formatter={(value, name) => {
-              const label = name === 'real' ? 'Real' : '¿Y si?';
-              return [typeof value === 'number' ? formatNumberCompact(value) : '', label];
-            }}
-            offset={10}
-            allowEscapeViewBox={{ x: false, y: false }}
-            position={{ y: 0 }}
-          />
-          <Line
-            type="monotone"
-            dataKey="real"
-            stroke={colors.neutralLine}
-            strokeWidth={2}
-            isAnimationActive={false}
-            dot={{ fill: colors.neutralLine, r: isMobile ? 4 : 5 }}
-            activeDot={{ r: isMobile ? 6 : 7 }}
-            name="real"
-          />
-          <Line
-            type="monotone"
-            dataKey="whatIf"
-            stroke={colors.accent}
-            strokeWidth={2}
-            isAnimationActive={false}
-            dot={renderWhatIfDot}
-            activeDot={renderWhatIfActiveDot}
-            name="whatIf"
-          />
-        </LineChart>
-      </ResponsiveContainer>
+          <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke={colors.gridColor} />
+            <XAxis
+              dataKey="sexenio"
+              stroke={colors.textColor}
+              style={{ fontSize: isMobile ? '10px' : '12px' }}
+              angle={isMobile ? -45 : 0}
+              textAnchor={isMobile ? 'end' : 'middle'}
+              height={isMobile ? 60 : 30}
+            />
+            <YAxis
+              stroke={colors.textColor}
+              style={{ fontSize: isMobile ? '10px' : '12px' }}
+              label={{
+                value: 'Homicidios',
+                angle: -90,
+                position: 'insideLeft',
+                fill: colors.textColor,
+                style: { fontSize: isMobile ? '10px' : '12px' },
+              }}
+              tickFormatter={formatNumberCompact}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: colors.tooltipBg,
+                border: `1px solid ${colors.tooltipBorder}`,
+                borderRadius: '4px',
+                color: colors.tooltipText,
+                maxWidth: isMobile ? '140px' : '200px',
+                fontSize: isMobile ? '11px' : '14px',
+                padding: isMobile ? '6px 8px' : '8px 12px',
+              }}
+              formatter={(value, name) => {
+                const label = name === 'real' ? 'Real' : '¿Y si?';
+                return [typeof value === 'number' ? formatNumberCompact(value) : '', label];
+              }}
+              offset={10}
+              allowEscapeViewBox={{ x: false, y: false }}
+              position={{ y: 0 }}
+            />
+            <Line
+              type="monotone"
+              dataKey="real"
+              stroke={colors.neutralLine}
+              strokeWidth={2}
+              isAnimationActive={false}
+              dot={{ fill: colors.neutralLine, r: isMobile ? 4 : 5 }}
+              activeDot={{ r: isMobile ? 6 : 7 }}
+              name="real"
+            />
+            <Line
+              type="monotone"
+              dataKey="whatIf"
+              stroke={colors.accent}
+              strokeWidth={2}
+              isAnimationActive={false}
+              dot={renderWhatIfDot}
+              activeDot={renderWhatIfActiveDot}
+              name="whatIf"
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

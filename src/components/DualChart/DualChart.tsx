@@ -8,7 +8,7 @@ import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator';
 // Recharts is the largest dependency in the bundle; load it on demand
 // so it's not part of the initial JS chunk.
 const ComparisonChart = lazy(() =>
-  import('./ComparisonChart').then((module) => ({ default: module.ComparisonChart }))
+  import('./ComparisonChart').then((module) => ({ default: module.ComparisonChart })),
 );
 
 const ChartFallback = () => (

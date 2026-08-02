@@ -2,7 +2,7 @@
  * Hook para altura responsive de gráficos
  */
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useResponsiveChartHeight = () => {
   const [height, setHeight] = useState(400);

@@ -2,8 +2,8 @@
  * Tests for DualChart (issue #18: on-brand loading states)
  */
 
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { DualChart } from './DualChart';
 
 describe('DualChart', () => {

@@ -2,8 +2,8 @@
  * Tests for DataSourceFooter (issue #24: center the projections note as its own block)
  */
 
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { DataSourceFooter } from './DataSourceFooter';
 
 describe('DataSourceFooter', () => {

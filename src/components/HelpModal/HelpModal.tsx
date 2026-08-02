@@ -3,7 +3,15 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { HelpIcon, TargetIcon, SlotsIcon, CalculatorIcon, ChartIcon, TipIcon, ResetIcon } from '../icons/Icons';
+import {
+  CalculatorIcon,
+  ChartIcon,
+  HelpIcon,
+  ResetIcon,
+  SlotsIcon,
+  TargetIcon,
+  TipIcon,
+} from '../icons/Icons';
 
 interface Props {
   isOpen: boolean;
@@ -51,6 +59,7 @@ export const HelpModal = ({ isOpen, onClose, isWelcome = false }: Props) => {
     >
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <button
+          type="button"
           onClick={onClose}
           className="absolute inset-0 cursor-default"
           aria-label="Cerrar modal"
@@ -65,141 +74,158 @@ export const HelpModal = ({ isOpen, onClose, isWelcome = false }: Props) => {
             border border-dark-border
           "
         >
-        {/* Header */}
-        <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center gap-4">
-          <div>
-            <h2 id="help-modal-title" className="text-2xl font-bold text-dark-text flex items-center gap-2">
-              <HelpIcon className="w-6 h-6 flex-shrink-0" />
-              {isWelcome ? 'Bienvenido al simulador ¿Y si?' : 'Guía del Simulador'}
-            </h2>
-            {isWelcome && (
-              <p className="text-dark-text-secondary text-sm mt-1">
-                Cada sexenio que elijas se acumula sobre el anterior, como una cascada. Así funciona:
-              </p>
-            )}
-          </div>
-          <button
-            onClick={onClose}
-            className="
+          {/* Header */}
+          <div className="sticky top-0 bg-dark-card border-b border-dark-border px-6 py-4 flex justify-between items-center gap-4">
+            <div>
+              <h2
+                id="help-modal-title"
+                className="text-2xl font-bold text-dark-text flex items-center gap-2"
+              >
+                <HelpIcon className="w-6 h-6 flex-shrink-0" />
+                {isWelcome ? 'Bienvenido al simulador ¿Y si?' : 'Guía del Simulador'}
+              </h2>
+              {isWelcome && (
+                <p className="text-dark-text-secondary text-sm mt-1">
+                  Cada sexenio que elijas se acumula sobre el anterior, como una cascada. Así
+                  funciona:
+                </p>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="
               flex-shrink-0
               text-dark-text-secondary hover:text-dark-text
               text-2xl leading-none
               focus:outline-none focus:ring-2 focus:ring-accent rounded
               px-2
             "
-            aria-label="Cerrar ayuda"
-          >
-            ×
-          </button>
-        </div>
+              aria-label="Cerrar ayuda"
+            >
+              ×
+            </button>
+          </div>
 
-        {/* Content */}
-        <div className="px-6 py-6 space-y-6 text-dark-text">
-          <section>
-            <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
-              <TargetIcon className="w-5 h-5 flex-shrink-0" /> ¿Qué hace este simulador?
-            </h3>
-            <p className="text-dark-text-secondary">
-              Te permite responder preguntas "¿Y si?" sobre homicidios en México (2000-2026).
-              Por ejemplo: <em>¿Qué habría pasado si AMLO hubiera gobernado en lugar de Calderón?</em>
-            </p>
-          </section>
+          {/* Content */}
+          <div className="px-6 py-6 space-y-6 text-dark-text">
+            <section>
+              <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
+                <TargetIcon className="w-5 h-5 flex-shrink-0" /> ¿Qué hace este simulador?
+              </h3>
+              <p className="text-dark-text-secondary">
+                Te permite responder preguntas "¿Y si?" sobre homicidios en México (2000-2026). Por
+                ejemplo: <em>¿Qué habría pasado si AMLO hubiera gobernado en lugar de Calderón?</em>
+              </p>
+            </section>
 
-          <section>
-            <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
-              <SlotsIcon className="w-5 h-5 flex-shrink-0" /> Sistema de Slots
-            </h3>
-            <p className="text-dark-text-secondary mb-2">
-              Los <strong>5 slots</strong> representan los 5 sexenios presidenciales desde 2000:
-            </p>
-            <ul className="list-disc list-inside text-dark-text-secondary space-y-1 ml-4">
-              <li><strong>Slot 1 (Fijo):</strong> V. Fox (2000-2006) - Punto de partida histórico</li>
-              <li><strong>Slots 2-5:</strong> Selecciona qué presidente gobernaría en ese período</li>
-            </ul>
-            <p className="text-dark-text-secondary mt-2">
-              El simulador aplica la <strong>tasa de crecimiento real</strong> de cada presidente al valor acumulado.
-            </p>
-          </section>
+            <section>
+              <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
+                <SlotsIcon className="w-5 h-5 flex-shrink-0" /> Sistema de Slots
+              </h3>
+              <p className="text-dark-text-secondary mb-2">
+                Los <strong>5 slots</strong> representan los 5 sexenios presidenciales desde 2000:
+              </p>
+              <ul className="list-disc list-inside text-dark-text-secondary space-y-1 ml-4">
+                <li>
+                  <strong>Slot 1 (Fijo):</strong> V. Fox (2000-2006) - Punto de partida histórico
+                </li>
+                <li>
+                  <strong>Slots 2-5:</strong> Selecciona qué presidente gobernaría en ese período
+                </li>
+              </ul>
+              <p className="text-dark-text-secondary mt-2">
+                El simulador aplica la <strong>tasa de crecimiento real</strong> de cada presidente
+                al valor acumulado.
+              </p>
+            </section>
 
-          <section>
-            <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
-              <CalculatorIcon className="w-5 h-5 flex-shrink-0" /> Algoritmo de Cascada
-            </h3>
-            <p className="text-dark-text-secondary mb-2">
-              Cada slot multiplica el valor anterior por la tasa de crecimiento del presidente seleccionado:
-            </p>
-            <div className="bg-dark-bg rounded p-4 text-sm font-mono">
-              <p>Valor<sub>slot</sub> = Valor<sub>anterior</sub> × (1 + Tasa de Crecimiento)</p>
-            </div>
-            <p className="text-dark-text-secondary mt-2 text-sm">
-              <strong>Ejemplo:</strong> Si Fox termina con 10,452 homicidios y seleccionas AMLO (TC: -22%),
-              el resultado sería: 10,452 × 0.78 = 8,152 homicidios.
-            </p>
-          </section>
+            <section>
+              <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
+                <CalculatorIcon className="w-5 h-5 flex-shrink-0" /> Algoritmo de Cascada
+              </h3>
+              <p className="text-dark-text-secondary mb-2">
+                Cada slot multiplica el valor anterior por la tasa de crecimiento del presidente
+                seleccionado:
+              </p>
+              <div className="bg-dark-bg rounded p-4 text-sm font-mono">
+                <p>
+                  Valor<sub>slot</sub> = Valor<sub>anterior</sub> × (1 + Tasa de Crecimiento)
+                </p>
+              </div>
+              <p className="text-dark-text-secondary mt-2 text-sm">
+                <strong>Ejemplo:</strong> Si Fox termina con 10,452 homicidios y seleccionas AMLO
+                (TC: -22%), el resultado sería: 10,452 × 0.78 = 8,152 homicidios.
+              </p>
+            </section>
 
-          <section>
-            <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
-              <ChartIcon className="w-5 h-5 flex-shrink-0" /> Cómo interpretar los gráficos
-            </h3>
-            <ul className="list-disc list-inside text-dark-text-secondary space-y-2 ml-4">
-              <li>
-                <strong className="text-danger">Rojo:</strong> Períodos con aumento de homicidios (crecimiento)
-              </li>
-              <li>
-                <strong className="text-success">Verde:</strong> Períodos con reducción de homicidios (mejora)
-              </li>
-              <li>
-                <strong>Realidad Histórica:</strong> Muestra lo que realmente sucedió
-              </li>
-              <li>
-                <strong>Simulación ¿Y si?:</strong> Muestra tu escenario alternativo
-              </li>
-              <li>
-                <strong>Comparación:</strong> Líneas que contrastan ambos escenarios
-              </li>
-            </ul>
-          </section>
+            <section>
+              <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
+                <ChartIcon className="w-5 h-5 flex-shrink-0" /> Cómo interpretar los gráficos
+              </h3>
+              <ul className="list-disc list-inside text-dark-text-secondary space-y-2 ml-4">
+                <li>
+                  <strong className="text-danger">Rojo:</strong> Períodos con aumento de homicidios
+                  (crecimiento)
+                </li>
+                <li>
+                  <strong className="text-success">Verde:</strong> Períodos con reducción de
+                  homicidios (mejora)
+                </li>
+                <li>
+                  <strong>Realidad Histórica:</strong> Muestra lo que realmente sucedió
+                </li>
+                <li>
+                  <strong>Simulación ¿Y si?:</strong> Muestra tu escenario alternativo
+                </li>
+                <li>
+                  <strong>Comparación:</strong> Líneas que contrastan ambos escenarios
+                </li>
+              </ul>
+            </section>
 
-          <section>
-            <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
-              <TipIcon className="w-5 h-5 flex-shrink-0" /> Tips de uso
-            </h3>
-            <ul className="list-disc list-inside text-dark-text-secondary space-y-1 ml-4">
-              <li className="flex items-start gap-1">
-                <span>Usa el botón</span>
-                <strong className="inline-flex items-center gap-1">
-                  <ResetIcon className="w-4 h-4 flex-shrink-0" /> Resetear
-                </strong>
-                <span>para volver al escenario histórico</span>
-              </li>
-              <li>Pasa el mouse sobre las barras/líneas para ver valores exactos</li>
-              <li>Prueba escenarios extremos: ¿5 sexenios del mismo presidente?</li>
-              <li>Compara diferencias porcentuales en el panel de métricas</li>
-            </ul>
-          </section>
+            <section>
+              <h3 className="text-lg font-bold mb-2 text-accent flex items-center gap-2">
+                <TipIcon className="w-5 h-5 flex-shrink-0" /> Tips de uso
+              </h3>
+              <ul className="list-disc list-inside text-dark-text-secondary space-y-1 ml-4">
+                <li className="flex items-start gap-1">
+                  <span>Usa el botón</span>
+                  <strong className="inline-flex items-center gap-1">
+                    <ResetIcon className="w-4 h-4 flex-shrink-0" /> Resetear
+                  </strong>
+                  <span>para volver al escenario histórico</span>
+                </li>
+                <li>Pasa el mouse sobre las barras/líneas para ver valores exactos</li>
+                <li>Prueba escenarios extremos: ¿5 sexenios del mismo presidente?</li>
+                <li>Compara diferencias porcentuales en el panel de métricas</li>
+              </ul>
+            </section>
 
-          <section className="border-t border-dark-border pt-4">
-            <p className="text-xs text-dark-text-secondary">
-              <strong>Fuentes:</strong> INEGI, SESNSP, World Bank | <strong>Proyección 2024-2026:</strong> Basada en tendencia observada (-31%)
-            </p>
-          </section>
-        </div>
+            <section className="border-t border-dark-border pt-4">
+              <p className="text-xs text-dark-text-secondary">
+                <strong>Fuentes:</strong> INEGI, SESNSP, World Bank |{' '}
+                <strong>Proyección 2024-2026:</strong> Basada en tendencia observada (-31%)
+              </p>
+            </section>
+          </div>
 
-        {/* Footer */}
-        <div className="sticky bottom-0 bg-dark-card border-t border-dark-border px-6 py-4">
-          <button
-            onClick={onClose}
-            className="
+          {/* Footer */}
+          <div className="sticky bottom-0 bg-dark-card border-t border-dark-border px-6 py-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="
               w-full bg-accent text-white px-6 py-3 rounded-lg
               hover:bg-blue-600 transition-colors
               focus:outline-none focus:ring-2 focus:ring-accent
               font-semibold
             "
-          >
-            Entendido, empezar a simular
-          </button>
+            >
+              Entendido, empezar a simular
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </dialog>
   );

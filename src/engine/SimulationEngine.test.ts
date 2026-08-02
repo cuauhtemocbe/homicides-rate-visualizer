@@ -2,7 +2,7 @@
  * Tests for SimulationEngine
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { SimulationEngine } from './SimulationEngine';
 
 describe('SimulationEngine', () => {
@@ -14,11 +14,11 @@ describe('SimulationEngine', () => {
       const result = engine.calculateWhatIfScenario(historico);
 
       // Verificar valores históricos (multiplicadores corregidos)
-      expect(result.valores[0]).toBe(10452);  // Fox
-      expect(result.valores[1]).toBe(25963);  // Calderón: 10452 * 2.484 ≈ 25,963
-      expect(result.valores[2]).toBe(36685);  // Peña: 25963 * 1.413 ≈ 36,685 (redondeo acumulado)
-      expect(result.valores[3]).toBe(29752);  // AMLO: 36685 * 0.811 ≈ 29,752
-      expect(result.valores[4]).toBe(20529);  // Sheinbaum: 29752 * 0.690 ≈ 20,529
+      expect(result.valores[0]).toBe(10452); // Fox
+      expect(result.valores[1]).toBe(25963); // Calderón: 10452 * 2.484 ≈ 25,963
+      expect(result.valores[2]).toBe(36685); // Peña: 25963 * 1.413 ≈ 36,685 (redondeo acumulado)
+      expect(result.valores[3]).toBe(29752); // AMLO: 36685 * 0.811 ≈ 29,752
+      expect(result.valores[4]).toBe(20529); // Sheinbaum: 29752 * 0.690 ≈ 20,529
 
       expect(result.valorFinal).toBe(20529);
 
@@ -33,7 +33,7 @@ describe('SimulationEngine', () => {
         slot1: 'calderon',
         slot2: 'calderon',
         slot3: 'calderon',
-        slot4: 'calderon'
+        slot4: 'calderon',
       });
 
       // Fox: 10,452
@@ -58,7 +58,7 @@ describe('SimulationEngine', () => {
         slot1: 'amlo',
         slot2: 'amlo',
         slot3: 'amlo',
-        slot4: 'amlo'
+        slot4: 'amlo',
       });
 
       // Fox: 10,452
@@ -87,7 +87,7 @@ describe('SimulationEngine', () => {
         slot1: 'calderon',
         slot2: 'calderon',
         slot3: 'amlo',
-        slot4: 'sheinbaum'
+        slot4: 'sheinbaum',
       });
 
       const valorRealFinal = 20536;
