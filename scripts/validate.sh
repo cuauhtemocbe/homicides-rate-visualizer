@@ -59,6 +59,20 @@ echo "✅ Build output verified"
 # Optional: Run additional checks
 echo "🔍 Running additional validations..."
 
+# Verify the Makefile documents every required target
+echo "📋 Verifying Makefile help output..."
+if ! ./scripts/test-makefile-help.sh; then
+    echo "❌ Makefile help verification failed"
+    exit 1
+fi
+
+# Verify CLAUDE.md stays in sync with package.json scripts
+echo "📄 Checking CLAUDE.md for script drift..."
+if ! ./scripts/check-claude-md-drift.sh; then
+    echo "❌ CLAUDE.md drift check failed"
+    exit 1
+fi
+
 # Check for common security issues (if package.json audit is available)
 echo "🔒 Running security audit..."
 if pnpm audit --audit-level moderate; then
