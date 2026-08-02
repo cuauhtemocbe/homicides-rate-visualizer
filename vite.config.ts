@@ -21,6 +21,11 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    // Node >=22's experimental Web Storage API defines a `localStorage`
+    // global that throws "not available" without --localstorage-file. That
+    // shadows jsdom's own window.localStorage, since jsdom only installs its
+    // polyfill when the global is absent. Disable it so jsdom's wins.
+    execArgv: ['--no-experimental-webstorage'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov', 'html'],
