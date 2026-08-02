@@ -170,51 +170,67 @@ Engram will extract and save these items automatically via mem_capture_passive.
 
 ---
 
-## Architecture and Design Rules (Project-Specific Example)
+## Architecture and Design Rules
 
-**Note**: This section is project-specific. Adapt it to your architecture and tech stack.
+**Layering:** `src/` is organized by responsibility, not by hexagonal ports/adapters:
+- **`components/`** (presentation): React components, one folder per component with its colocated `*.test.tsx`
+- **`engine/`** (business logic): Pure domain logic with zero React/store dependencies — e.g. `SimulationEngine`, which takes slot config in and returns computed results out
+- **`store/`** (UI-state infrastructure, not domain): Zustand store (`useSimulationStore.ts`) — holds UI state and delegates calculations to `engine/`, never contains business rules itself
+- **`hooks/`** (composition layer): Bridges `engine/`/`store/` and `components/` — e.g. `useShareSimulation`, `useChartColors`
+- **`data/`**: Static historical datasets and their types
+- **`utils/`**: Pure, stateless helper functions (e.g. `validatePresidenteId`)
 
-### Example: Pragmatic Hexagonal Architecture
+**KISS Principle:** Flat, easy-to-read and test code. Prefer pure functions over classes when possible — `engine/` is the one deliberate exception, since the cascading calculation benefits from constructor-injected state.
 
-**Layering:** Strict separation between:
-- **Presentation** (`api/`): HTTP handlers, controllers, DTOs
-- **Business Logic** (`domain/`, `services/`): Core domain models, use cases
-- **Infrastructure** (`infrastructure/`): Database, external APIs, adapters
-
-**Structural Typing (Go style):** 
-- Use `interface` in domain to define contracts
-- Avoid complex inheritance or `abstract class`
-- Leverage TypeScript's structural Duck Typing
-
-**KISS Principle:** Flat, easy-to-read and test code. Prefer pure functions over classes when possible.
-
-**Configuration Example:**
+**Real example** (`src/engine/SimulationEngine.ts`):
 ```ts
-// config.ts
-import { z } from "zod";
+export class SimulationEngine {
+  private readonly presidentes: Record<PresidenteId, Presidente>;
 
-const ConfigSchema = z.object({
-  DATABASE_URL: z.string().url(),
-  PORT: z.coerce.number().default(3000),
-});
+  calculateWhatIfScenario(slots: SimulacionSlots): ResultadoSimulacion {
+    const valores: number[] = [];
+    let valorActual = this.presidentes.fox.cierreOficial; // Fox slot is always fixed
 
-export const config = ConfigSchema.parse(process.env); // implicit singleton
+    const slotIds: PresidenteId[] = [slots.slot1, slots.slot2, slots.slot3, slots.slot4];
+    for (const presidenteId of slotIds) {
+      const presidente = this.presidentes[presidenteId];
+      valorActual = valorActual * presidente.multiplicador; // cascading V_final = V_anterior × (1 + TC)
+      valores.push(Math.round(valorActual));
+    }
+    // ...
+  }
+}
 ```
 
----
+### Stack & Key Commands
 
-## Adapting This Template
+React 19 + TypeScript + Vite, state via Zustand, charts via Recharts, styling via Tailwind CSS. Every command below is an actual `package.json` script — run with `pnpm run <script>` or `pnpm <script>`:
 
-This `CLAUDE.example.md` is a starting point. To use it in your project:
+| Script | Purpose |
+|---|---|
+| `dev` | Start the Vite dev server |
+| `start:dev` | Start the dev server and open the browser |
+| `build` | `tsc` then `vite build` |
+| `typecheck` | `tsc --noEmit` |
+| `preview` | Preview the production build |
+| `test` | Run Vitest in watch mode |
+| `test:run` | Run Vitest once (CI) |
+| `test:ui` | Open the Vitest UI |
+| `test:coverage` | Run tests with coverage |
+| `test:watch` | Explicit alias of `test` |
+| `lint` | `biome check .` |
+| `format:check` | `biome format .` |
+| `clean` | Remove `dist/` and Vite cache |
+| `clean:all` | Remove `dist/`, `node_modules/`, pnpm store |
+| `validate` | Run `scripts/validate.sh` |
+| `prepare` | Install Husky hooks |
 
-1. **Copy to `CLAUDE.md`** in your project root (or `.claude/CLAUDE.md`)
-2. **Customize Architecture section** with your specific rules (layering, patterns, conventions)
-3. **Adjust Quality Gates** (coverage targets, mutation scores, SonarQube thresholds)
-4. **Configure Issue Tracker** (GitHub vs GitLab, labels, project board links)
-5. **Add Project Context** (domain knowledge, key constraints, team conventions)
-6. **Remove what you don't use** (if you don't use SonarQube, remove that section)
+Or via the [Makefile](./Makefile): `make help` lists the wrapped targets (`up`, `down`, `dev`, `test`, `lint`, `typecheck`, `build`, `validate`, `coverage`).
 
-The skills (`/spec-driven-dev`, `/user-stories`, `/testing`, etc.) are universal and work across projects. The CLAUDE.md file is where you add project-specific context.
+### Deliberate decisions (documented so future changes don't "fix" them)
+
+- **Hosted CI exists**: `.github/workflows/ci.yml` runs `lint`, `test`, `typecheck`, `lock-check`, `license-check`, `trivy-fs` on every push/PR, plus a `build` job gated to `main`. This is not optional tooling to be added later — it already ships.
+- **Tests are colocated next to source**, not in a separate `tests/` tree (e.g. `SimulationEngine.test.ts` next to `SimulationEngine.ts`, `App.test.tsx` next to `App.tsx`). Do not introduce a parallel `tests/` directory.
 
 ---
 

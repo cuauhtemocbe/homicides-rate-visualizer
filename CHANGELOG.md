@@ -7,6 +7,40 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ---
 
+## [2.1.0] - 2026-08-01
+
+### Added
+
+- **Onboarding y compartir**: auto-onboarding en la primera visita, soporte táctil en tooltips, y compartir simulaciones vía URL (`useShareSimulation`) con validación del president id recibido
+- **Identidad visual institucional**: paleta de colores rediseñada, tipografía display en título y números de headline, set de iconos propio (reemplaza emojis), estados de carga on-brand, animación de dígitos en resultados
+- **CI hosteada**: `.github/workflows/ci.yml` con jobs `lint`, `test`, `typecheck`, `lock-check`, `license-check`, `trivy-fs` y `build` gateado a `main`
+- **Dependabot** (`.github/dependabot.yml`) y **Socket Firewall** (`.github/workflows/socket-firewall.yml`) para actualizaciones de dependencias automatizadas y protegidas contra paquetes maliciosos
+- **Scan de secretos en pre-commit** vía `gitleaks protect --staged`
+- **Cobertura de tests** para `SimulationEngine`, `ComparisonChart`, `MetricsPanel`, `SimulationControls`, `PresidentSlot` y el store
+
+### Changed
+
+- **UI simplificada**: un solo `ComparisonChart` de líneas en lugar de las dos gráficas de barras (`RealChart`/`WhatIfChart`); métricas de headline promovidas arriba del chart; controles de simulación en layout de dos columnas para móvil
+- **Migración a pnpm** como único gestor de paquetes, con scripts reorganizados y documentación actualizada
+- **Node.js 22 → 24 → 26** en Docker, con la imagen de producción pineada por digest (`node:26-alpine`)
+- **Tailwind CSS v3 → v4**, Vite/Vitest/`@vitejs/plugin-react`/jsdom a sus últimas majors
+- **`ComparisonChart`** con lazy-load (code-splitting de Recharts) y líneas sólidas con marcadores de forma en vez de patrones de guiones
+- Título traducido a "México: Simulador de Escenarios de Seguridad" y "What-If" → "¿Y si?"
+
+### Fixed
+
+- Multiplicadores de cascada corregidos para coincidir con datos históricos
+- Posicionamiento y ancho del tooltip de comparación en viewports pequeños
+- Visibilidad e interacción del `HelpModal`
+- `npm`/`npx` eliminados de las imágenes Docker para quitar CVEs de sus dependencias transitivas
+- Descubrimiento de `pnpm` en el hook `pre-push` no interactivo (source de `nvm`)
+
+### Removed
+
+- Código muerto: `main.ts`, `RealChart`, `WhatIfChart`
+
+---
+
 ## [2.0.0] - 2026-05-04
 
 ### 🎉 Rediseño Completo - MX Security What-If Simulator

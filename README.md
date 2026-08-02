@@ -278,6 +278,8 @@ Compatible con: Vercel, Netlify, GitHub Pages, Cloudflare Pages
 
 ## 🤝 Contribuir
 
+`main` tiene branch protection: un PR no es mergeable si `lint`, `test`, `typecheck`, `lock-check`, `license-check` o `trivy-fs` fallan en CI (`.github/workflows/ci.yml`). `enforce_admins` está deliberadamente en `false` — el owner del repo puede saltarse el gate en un push/merge directo si hace falta, en vez de quedar bloqueado igual que cualquier otro colaborador.
+
 1. Fork el repositorio
 2. Crea una rama de feature (`git checkout -b feature/amazing-feature`)
 3. Realiza tus cambios
