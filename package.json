@@ -60,7 +60,7 @@
     "jsdom": "^29.1.1",
     "lint-staged": "^16.1.6",
     "postcss": "8.5.18",
-    "tailwindcss": "^4.3.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.5.4",
     "vitest": "^4.1.10"
   },
