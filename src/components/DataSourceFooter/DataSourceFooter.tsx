@@ -40,9 +40,10 @@ export const DataSourceFooter = () => {
             Nota sobre Proyecciones
           </p>
           <p className="text-xs text-dark-text-secondary max-w-3xl mx-auto text-center">
-            Los datos de la administración de Claudia Sheinbaum (2024-2030) están <strong>proyectados</strong> con
-            base en la tendencia de reducción del -31% observada hasta mayo de 2026. Estos valores deben
-            considerarse estimaciones sujetas a cambios conforme se publiquen datos oficiales adicionales.
+            Los datos de la administración de Claudia Sheinbaum (2024-2030) están{' '}
+            <strong>proyectados</strong> con base en la tendencia de reducción del -31% observada
+            hasta mayo de 2026. Estos valores deben considerarse estimaciones sujetas a cambios
+            conforme se publiquen datos oficiales adicionales.
           </p>
         </div>
 

@@ -2,8 +2,8 @@
  * Tests for App header controls (issue #14: custom icon set)
  */
 
-import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 
 const EMOJI_PATTERN = /❓|☀️|🌙|⟲/;
@@ -88,7 +88,7 @@ describe('App layout order (issue #21: metrics-first layout)', () => {
     const chartArea = screen.getByRole('status', { name: 'Cargando gráfica...' });
 
     expect(
-      metricsPanel.compareDocumentPosition(chartArea) & Node.DOCUMENT_POSITION_FOLLOWING
+      metricsPanel.compareDocumentPosition(chartArea) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
 
@@ -100,7 +100,7 @@ describe('App layout order (issue #21: metrics-first layout)', () => {
     const resetButton = screen.getByTestId('reset-button');
 
     expect(
-      metricsPanel.compareDocumentPosition(resetButton) & Node.DOCUMENT_POSITION_FOLLOWING
+      metricsPanel.compareDocumentPosition(resetButton) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(main.contains(resetButton)).toBe(true);
   });

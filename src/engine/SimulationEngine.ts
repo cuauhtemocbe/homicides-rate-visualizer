@@ -5,9 +5,9 @@
  * Fórmula: V_final = V_anterior × (1 + TC_actual)
  */
 
-import { PRESIDENTES } from '../data/presidentes.data';
 import { VALOR_REAL_FINAL } from '../data/historico.data';
-import { Presidente, SimulacionSlots, ResultadoSimulacion, PresidenteId } from '../data/types';
+import { PRESIDENTES } from '../data/presidentes.data';
+import type { Presidente, PresidenteId, ResultadoSimulacion, SimulacionSlots } from '../data/types';
 
 export class SimulationEngine {
   private readonly presidentes: Record<PresidenteId, Presidente>;
@@ -47,7 +47,7 @@ export class SimulationEngine {
       valores,
       valorFinal,
       diferencia,
-      diferenciaPorcentual
+      diferenciaPorcentual,
     };
   }
 
@@ -60,7 +60,7 @@ export class SimulationEngine {
       slot1: 'calderon',
       slot2: 'pena',
       slot3: 'amlo',
-      slot4: 'sheinbaum'
+      slot4: 'sheinbaum',
     };
   }
 

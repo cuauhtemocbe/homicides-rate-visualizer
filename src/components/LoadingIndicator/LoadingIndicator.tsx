@@ -13,7 +13,11 @@ export const LoadingIndicator = ({ label, className = '' }: Props) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <div role="status" aria-label={label} className={`flex flex-col items-center gap-3 ${className}`}>
+    <div
+      role="status"
+      aria-label={label}
+      className={`flex flex-col items-center gap-3 ${className}`}
+    >
       <div
         className={`w-10 h-10 rounded-sm border-4 border-dark-border border-t-accent ${
           prefersReducedMotion ? '' : 'animate-spin'

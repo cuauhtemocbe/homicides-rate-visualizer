@@ -2,11 +2,11 @@
  * Controles de Simulación (Slots + Reset)
  */
 
+import type { PresidenteId } from '../../data/types';
 import { useSimulationStore } from '../../store/useSimulationStore';
-import { PresidentSlot } from './PresidentSlot';
 import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 import { ResetIcon } from '../icons/Icons';
-import type { PresidenteId } from '../../data/types';
+import { PresidentSlot } from './PresidentSlot';
 
 export const SimulationControls = () => {
   const { slotsActuales, setSlot, resetToHistorico } = useSimulationStore();
@@ -18,9 +18,7 @@ export const SimulationControls = () => {
   return (
     <div className="bg-dark-card rounded-lg p-6">
       <div className="flex items-center justify-center gap-2 mb-4">
-        <h3 className="text-lg font-bold text-dark-text">
-          Controles de Simulación
-        </h3>
+        <h3 className="text-lg font-bold text-dark-text">Controles de Simulación</h3>
         <InfoTooltip
           content="Selecciona qué presidente gobernaría en cada sexenio. El simulador aplicará su tasa de crecimiento real al valor acumulado."
           position="bottom"
@@ -29,11 +27,7 @@ export const SimulationControls = () => {
 
       {/* Desktop: horizontal layout with arrows */}
       <div className="hidden md:flex flex-wrap justify-center items-center gap-4 mb-6">
-        <PresidentSlot
-          slotNumber={0}
-          currentPresident={slotsActuales.slot0}
-          disabled={true}
-        />
+        <PresidentSlot slotNumber={0} currentPresident={slotsActuales.slot0} disabled={true} />
 
         <span className="text-dark-text-secondary text-2xl">→</span>
 
@@ -108,6 +102,7 @@ export const SimulationControls = () => {
 
       <div className="flex items-center justify-center gap-2">
         <button
+          type="button"
           onClick={resetToHistorico}
           className="
             bg-accent text-white px-6 py-2 rounded-lg

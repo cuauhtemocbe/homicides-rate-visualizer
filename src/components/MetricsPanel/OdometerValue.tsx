@@ -50,7 +50,7 @@ export const OdometerValue = ({ value, animate, locale = 'es-MX', className = ''
             <span key={index} className="inline-block">
               {char}
             </span>
-          )
+          ),
         )}
       </span>
       <span className="sr-only">{formatted}</span>

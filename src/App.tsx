@@ -4,16 +4,16 @@
  */
 
 import { useEffect, useState } from 'react';
-import { useSimulationStore } from './store/useSimulationStore';
-import { useShareSimulation } from './hooks/useShareSimulation';
-import { useFirstVisit } from './hooks/useFirstVisit';
-import { DualChart } from './components/DualChart/DualChart';
-import { SimulationControls } from './components/SimulationControls/SimulationControls';
-import { MetricsPanel } from './components/MetricsPanel/MetricsPanel';
 import { DataSourceFooter } from './components/DataSourceFooter/DataSourceFooter';
+import { DualChart } from './components/DualChart/DualChart';
 import { HelpModal } from './components/HelpModal/HelpModal';
+import { HelpIcon, MoonIcon, SunIcon } from './components/icons/Icons';
+import { MetricsPanel } from './components/MetricsPanel/MetricsPanel';
 import { ShareButton } from './components/ShareButton/ShareButton';
-import { HelpIcon, SunIcon, MoonIcon } from './components/icons/Icons';
+import { SimulationControls } from './components/SimulationControls/SimulationControls';
+import { useFirstVisit } from './hooks/useFirstVisit';
+import { useShareSimulation } from './hooks/useShareSimulation';
+import { useSimulationStore } from './store/useSimulationStore';
 import './index.css';
 
 function App() {
@@ -77,6 +77,7 @@ function App() {
           <div className="md:hidden flex flex-col gap-2 mb-4">
             <div className="flex gap-2 justify-center">
               <button
+                type="button"
                 onClick={() => setIsHelpOpen(true)}
                 className="
                   flex-1 bg-dark-card text-dark-text px-3 py-2 rounded-lg
@@ -92,6 +93,7 @@ function App() {
               <ShareButton />
 
               <button
+                type="button"
                 onClick={toggleTheme}
                 className="
                   flex-1 bg-dark-card text-dark-text px-3 py-2 rounded-lg
@@ -110,6 +112,7 @@ function App() {
           <div className="hidden md:flex justify-between items-start mb-4 flex-wrap gap-2">
             <div className="flex gap-2">
               <button
+                type="button"
                 onClick={() => setIsHelpOpen(true)}
                 className="
                   bg-dark-card text-dark-text px-4 py-2 rounded-lg
@@ -128,6 +131,7 @@ function App() {
             <div className="flex-1" />
 
             <button
+              type="button"
               onClick={toggleTheme}
               className="
                 bg-dark-card text-dark-text px-4 py-2 rounded-lg
@@ -158,7 +162,7 @@ function App() {
         </header>
 
         {/* Main Content */}
-        <main id="main-content" className="space-y-6" role="main">
+        <main id="main-content" className="space-y-6">
           {/* Panel de Métricas: el resultado primero, antes del detalle */}
           <MetricsPanel />
 

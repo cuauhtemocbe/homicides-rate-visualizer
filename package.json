@@ -29,7 +29,8 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
-    "lint": "tsc --noEmit",
+    "lint": "biome check .",
+    "format:check": "biome format .",
     "clean": "rm -rf dist node_modules/.vite",
     "clean:all": "rm -rf dist node_modules .pnpm-store",
     "validate": "./scripts/validate.sh",
@@ -44,6 +45,8 @@
     "zustand": "5.0.14"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.4",
+    "@tailwindcss/postcss": "^4.3.2",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
@@ -53,7 +56,6 @@
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/coverage-v8": "^4.1.10",
     "@vitest/ui": "^4.1.10",
-    "@tailwindcss/postcss": "^4.3.2",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "lint-staged": "^16.1.6",

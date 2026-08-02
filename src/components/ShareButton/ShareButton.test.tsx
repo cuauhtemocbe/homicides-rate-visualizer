@@ -2,9 +2,9 @@
  * Tests for ShareButton (issue #14: custom icon set)
  */
 
-import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ShareButton } from './ShareButton';
 
 const EMOJI_PATTERN = /🔗|✓/;
@@ -25,7 +25,7 @@ describe('ShareButton', () => {
   it('renders a custom checkmark icon instead of an emoji after a successful copy', async () => {
     Object.defineProperty(navigator, 'clipboard', {
       value: { writeText: vi.fn().mockResolvedValue(undefined) },
-      configurable: true
+      configurable: true,
     });
 
     const user = userEvent.setup();

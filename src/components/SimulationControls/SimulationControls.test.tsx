@@ -2,12 +2,12 @@
  * Tests for SimulationControls
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SimulationControls } from './SimulationControls';
-import { useSimulationStore } from '../../store/useSimulationStore';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { SimulationEngine } from '../../engine/SimulationEngine';
+import { useSimulationStore } from '../../store/useSimulationStore';
+import { SimulationControls } from './SimulationControls';
 
 describe('SimulationControls', () => {
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe('SimulationControls', () => {
     await user.click(screen.getByTestId('reset-button'));
 
     expect(useSimulationStore.getState().slotsActuales).toEqual(
-      new SimulationEngine().getConfiguracionHistorica()
+      new SimulationEngine().getConfiguracionHistorica(),
     );
   });
 

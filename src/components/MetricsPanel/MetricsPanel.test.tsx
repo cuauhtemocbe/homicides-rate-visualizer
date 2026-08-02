@@ -2,11 +2,11 @@
  * Tests for MetricsPanel
  */
 
-import { describe, it, expect, afterEach, vi } from 'vitest';
 import { act, render, screen } from '@testing-library/react';
-import { MetricsPanel } from './MetricsPanel';
-import { useSimulationStore } from '../../store/useSimulationStore';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ResultadoSimulacion } from '../../data/types';
+import { useSimulationStore } from '../../store/useSimulationStore';
+import { MetricsPanel } from './MetricsPanel';
 
 const HIGHLIGHT_CLASS = 'animate-metrics-highlight';
 
@@ -15,7 +15,7 @@ const mockMatchMedia = (matches: boolean) => {
     matches,
     media: query,
     addEventListener: vi.fn(),
-    removeEventListener: vi.fn()
+    removeEventListener: vi.fn(),
   }));
 };
 
@@ -24,7 +24,7 @@ const baseResultado: ResultadoSimulacion = {
   valores: [10452, 25963, 36685, 29752, 23616],
   valorFinal: 23616,
   diferencia: 3080,
-  diferenciaPorcentual: 15.04
+  diferenciaPorcentual: 15.04,
 };
 
 describe('MetricsPanel', () => {
@@ -50,8 +50,8 @@ describe('MetricsPanel', () => {
         ...baseResultado,
         valorFinal: 15000,
         diferencia: -5536,
-        diferenciaPorcentual: -26.96
-      }
+        diferenciaPorcentual: -26.96,
+      },
     });
 
     render(<MetricsPanel />);
@@ -85,7 +85,12 @@ describe('MetricsPanel', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 20000,
+          diferencia: -3616,
+          diferenciaPorcentual: -15.3,
+        },
       });
     });
 
@@ -100,7 +105,12 @@ describe('MetricsPanel', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 20000,
+          diferencia: -3616,
+          diferenciaPorcentual: -15.3,
+        },
       });
     });
 
@@ -165,7 +175,12 @@ describe('MetricsPanel rolling digit animation (issue #19)', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 20000,
+          diferencia: -3616,
+          diferenciaPorcentual: -15.3,
+        },
       });
     });
 
@@ -180,7 +195,12 @@ describe('MetricsPanel rolling digit animation (issue #19)', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 20000,
+          diferencia: -3616,
+          diferenciaPorcentual: -15.3,
+        },
       });
     });
 
@@ -198,7 +218,12 @@ describe('MetricsPanel rolling digit animation (issue #19)', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 15000, diferencia: -5536, diferenciaPorcentual: -26.96 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 15000,
+          diferencia: -5536,
+          diferenciaPorcentual: -26.96,
+        },
       });
     });
 
@@ -215,10 +240,20 @@ describe('MetricsPanel rolling digit animation (issue #19)', () => {
 
     act(() => {
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 18000, diferencia: -5616, diferenciaPorcentual: -23.7 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 18000,
+          diferencia: -5616,
+          diferenciaPorcentual: -23.7,
+        },
       });
       useSimulationStore.setState({
-        resultadoSimulacion: { ...baseResultado, valorFinal: 20000, diferencia: -3616, diferenciaPorcentual: -15.3 }
+        resultadoSimulacion: {
+          ...baseResultado,
+          valorFinal: 20000,
+          diferencia: -3616,
+          diferenciaPorcentual: -15.3,
+        },
       });
     });
 

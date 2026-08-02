@@ -37,26 +37,26 @@
 
 /* Light Theme (default) - institutional bulletin identity (#20) */
 :root {
-  --color-bg: #F2EEE3;
-  --color-card: #FBF9F2;
-  --color-text: #241F16;
-  --color-text-secondary: #6B6152;
-  --color-border: #DDD5C0;
-  --color-danger-theme: #A32419;
-  --color-success-theme: #3D6642;
-  --color-accent-theme: #96751C;
+  --color-bg: #f2eee3;
+  --color-card: #fbf9f2;
+  --color-text: #241f16;
+  --color-text-secondary: #6b6152;
+  --color-border: #ddd5c0;
+  --color-danger-theme: #a32419;
+  --color-success-theme: #3d6642;
+  --color-accent-theme: #96751c;
 }
 
 /* Dark Theme - WCAG AA compliant colors, institutional bulletin identity (#20) */
 .dark {
-  --color-bg: #17150F;
-  --color-card: #221E16;
-  --color-text: #EDE6D8;
-  --color-text-secondary: #A69C87;
-  --color-border: #38321F;
-  --color-danger-theme: #B3261E;
-  --color-success-theme: #4C7A51;
-  --color-accent-theme: #C9A227;
+  --color-bg: #17150f;
+  --color-card: #221e16;
+  --color-text: #ede6d8;
+  --color-text-secondary: #a69c87;
+  --color-border: #38321f;
+  --color-danger-theme: #b3261e;
+  --color-success-theme: #4c7a51;
+  --color-accent-theme: #c9a227;
 }
 
 /* Modal entrance */
