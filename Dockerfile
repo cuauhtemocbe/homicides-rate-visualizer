@@ -1,5 +1,5 @@
 # ---------- Builder ----------
-FROM node:26-alpine@sha256:e88a35be04478413b7c71c455cd9865de9b9360e1f43456be5951032d7ac1a66 AS builder
+FROM node:26-alpine@sha256:2d984a15c9b54fd0aeb608b8e0d0d83529eb34d2966db27a1fb4f1edc3d298a3 AS builder
 
 RUN apk add --no-cache git
 ENV PNPM_HOME="/root/.local/share/pnpm"
@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm run typecheck && pnpm run build
 
 # ---------- Production ----------
-FROM node:26-alpine@sha256:e88a35be04478413b7c71c455cd9865de9b9360e1f43456be5951032d7ac1a66 AS production
+FROM node:26-alpine@sha256:2d984a15c9b54fd0aeb608b8e0d0d83529eb34d2966db27a1fb4f1edc3d298a3 AS production
 
 RUN apk add --no-cache curl
 ENV NODE_ENV=production
