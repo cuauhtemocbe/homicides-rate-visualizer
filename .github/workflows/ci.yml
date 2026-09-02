@@ -1,7 +1,12 @@
 name: CI
 
 on:
+  # Scoped to main on purpose: an unfiltered `push` would run this whole
+  # pipeline a second time on every PR branch push, duplicating each job on
+  # the identical SHA. `pull_request` already covers branches; this covers
+  # merges into main, which is what the `build` job gates on.
   push:
+    branches: [main]
   pull_request:
 
 permissions:
