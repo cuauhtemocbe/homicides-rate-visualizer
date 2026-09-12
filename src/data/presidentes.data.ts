@@ -52,9 +52,9 @@ export const PRESIDENTES: Record<PresidenteId, Presidente> = {
     id: 'sheinbaum',
     nombre: 'Claudia Sheinbaum Pardo',
     nombreCorto: 'Sheinbaum',
-    tasaCrecimiento: -0.31, // -31.0% (20536/29741 - 1)
-    multiplicador: 0.69, // 20536 / 29741
-    cierreOficial: 20536, // Proyectado (calculado)
+    tasaCrecimiento: -0.53, // -53.0% (SESNSP, sep 2026: 86.9 -> 40.8 homicidios diarios promedio, sep-2024 vs ago-2026)
+    multiplicador: 0.47, // 1 + (-0.53)
+    cierreOficial: 13978, // Proyectado: 29741 (AMLO) * 0.47
     periodo: '2024-2030',
     esProyeccion: true,
   },

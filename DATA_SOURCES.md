@@ -53,11 +53,11 @@ $$
 | Felipe Calderón   | 2006         | 2012         | 10,452            | 25,967            | **+192.8%**    |
 | Enrique Peña Nieto| 2012         | 2018         | 25,967            | 36,685            | **+59.0%**     |
 | AMLO              | 2018         | 2024*        | 36,685            | 29,741            | **-22.0%**     |
-| Claudia Sheinbaum | 2024         | 2030**       | 29,741            | 20,536***         | **-31.0%**     |
+| Claudia Sheinbaum | 2024         | 2030**       | 29,741            | 13,978***         | **-53.0%**     |
 
 _*Cierre estimado 2023-2024 (último dato disponible)_  
 _**Proyección hasta 2030_  
-_***Valor proyectado basado en tendencia observada hasta mayo 2026_
+_***Valor proyectado basado en tendencia observada hasta agosto 2026_
 
 ---
 
@@ -77,7 +77,7 @@ $$
 | Felipe Calderón   | +192.8%  | 2.928         |
 | Enrique Peña Nieto| +59.0%   | 1.59          |
 | AMLO              | -22.0%   | 0.78          |
-| Claudia Sheinbaum | -31.0%   | 0.69          |
+| Claudia Sheinbaum | -53.0%   | 0.47          |
 
 ---
 
@@ -96,7 +96,7 @@ Los datos fueron validados contra múltiples fuentes:
 
 - **Calderón (2006-2012)**: Los datos varían entre 25,900 y 26,000. Usamos **25,967** (INEGI oficial).
 - **AMLO (2018-2024)**: Dato de cierre estimado en **29,741** basado en datos 2023.
-- **Sheinbaum (2024-2030)**: **Proyección** basada en tendencia de -31% observada hasta mayo 2026.
+- **Sheinbaum (2024-2030)**: **Proyección** basada en tendencia de -53% observada hasta agosto 2026.
 
 ---
 
@@ -107,12 +107,12 @@ Los datos fueron validados contra múltiples fuentes:
 ⚠️ **IMPORTANTE**: Los datos de Claudia Sheinbaum son **proyectados**, no oficiales.
 
 **Metodología**:
-1. Datos de homicidios de octubre 2024 a mayo 2026: Tendencia de reducción del -31%
+1. Datos de homicidios diarios promedio de septiembre 2024 (86.9/día) a agosto 2026 (40.8/día): Tendencia de reducción del -53% (dato oficial SESNSP, presentado en la mañanera del 8 de septiembre de 2026)
 2. Extrapolación: Se asume que la tendencia se mantiene hasta 2030
-3. Cierre proyectado: **20,536 homicidios**
+3. Cierre proyectado: **13,978 homicidios** (29,741 × 0.47)
 
 **Fuentes**:
-- SESNSP: Datos preliminares 2024-2026
+- SESNSP: Informe de seguridad, mañanera presidencial, 8 de septiembre de 2026 (Marcela Figueroa Franco, titular del SESNSP)
 - Análisis de tendencia: Regresión lineal simple
 
 **Limitaciones**:
@@ -140,7 +140,7 @@ Los datos serán actualizados conforme:
 2. INEGI publique datos anuales consolidados
 3. Se cierre la administración de Claudia Sheinbaum (2030)
 
-**Última actualización**: 2026-05-04
+**Última actualización**: 2026-09-12
 
 ---
 

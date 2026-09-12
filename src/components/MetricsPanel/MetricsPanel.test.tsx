@@ -122,7 +122,7 @@ describe('MetricsPanel', () => {
 
     render(<MetricsPanel />);
 
-    expect(screen.getByText('20,536')).toHaveClass('font-display');
+    expect(screen.getByText('13,978')).toHaveClass('font-display');
     expect(screen.getByTestId('whatif-value')).toHaveClass('font-display');
     expect(screen.getByTestId('whatif-value').textContent).toContain('23,616');
     expect(screen.getByTestId('diferencia-value')).toHaveClass('font-display');

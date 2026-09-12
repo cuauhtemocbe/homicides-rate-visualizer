@@ -18,12 +18,12 @@ describe('SimulationEngine', () => {
       expect(result.valores[1]).toBe(25963); // Calderón: 10452 * 2.484 ≈ 25,963
       expect(result.valores[2]).toBe(36685); // Peña: 25963 * 1.413 ≈ 36,685 (redondeo acumulado)
       expect(result.valores[3]).toBe(29752); // AMLO: 36685 * 0.811 ≈ 29,752
-      expect(result.valores[4]).toBe(20529); // Sheinbaum: 29752 * 0.690 ≈ 20,529
+      expect(result.valores[4]).toBe(13983); // Sheinbaum: 29752 * 0.47 ≈ 13,983
 
-      expect(result.valorFinal).toBe(20529);
+      expect(result.valorFinal).toBe(13983);
 
-      // La diferencia con el valor real proyectado (20,536) es mínima
-      const diferenciaEsperada = 20529 - 20536;
+      // La diferencia con el valor real proyectado (13,978) es mínima
+      const diferenciaEsperada = 13983 - 13978;
       expect(result.diferencia).toBe(diferenciaEsperada);
     });
 
@@ -90,7 +90,7 @@ describe('SimulationEngine', () => {
         slot4: 'sheinbaum',
       });
 
-      const valorRealFinal = 20536;
+      const valorRealFinal = 13978;
       const diferenciaEsperada = result.valorFinal - valorRealFinal;
       const porcentajeEsperado = (diferenciaEsperada / valorRealFinal) * 100;
 

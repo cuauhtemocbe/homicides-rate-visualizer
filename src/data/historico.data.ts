@@ -38,9 +38,9 @@ export const HISTORICO_REAL: RegistroHistorico[] = [
   },
   {
     presidente: 'sheinbaum',
-    homicidios: 20536, // Proyectado
-    tasaCrecimiento: -31.0,
-    multiplicador: 0.69, // Ya estaba correcto: 20536 / 29741
+    homicidios: 13978, // Proyectado: 29741 (AMLO) * 0.47
+    tasaCrecimiento: -53.0, // SESNSP, sep 2026: -53% homicidios diarios promedio (sep-2024 vs ago-2026)
+    multiplicador: 0.47, // 13978 / 29741
     color: 'green', // Reducción proyectada
   },
 ];
@@ -48,4 +48,4 @@ export const HISTORICO_REAL: RegistroHistorico[] = [
 /**
  * Valor final de la realidad histórica (Sheinbaum proyectado)
  */
-export const VALOR_REAL_FINAL = 20536;
+export const VALOR_REAL_FINAL = 13978;

@@ -71,9 +71,9 @@ Slot 4: [Presidente seleccionado]
 | F. Calderón      | +148.4%             | 2.484         | 25,967         |
 | E. Peña Nieto    | +41.3%              | 1.413         | 36,685         |
 | AMLO             | -18.9%              | 0.811         | 29,741         |
-| C. Sheinbaum*    | -31.0%              | 0.690         | 20,536         |
+| C. Sheinbaum*    | -53.0%              | 0.470         | 13,978         |
 
-_*Datos proyectados con base en tendencia observada hasta mayo 2026_
+_*Datos proyectados con base en tendencia observada hasta agosto 2026_
 
 ---
 
@@ -241,7 +241,7 @@ Los datos provienen de fuentes oficiales:
 - **World Bank**: Banco Mundial
 - **Estudios Académicos**: Referencias verificadas en Wikipedia
 
-> **Nota sobre Proyecciones**: Los datos de la administración de Claudia Sheinbaum (2024-2030) están **proyectados** con base en la tendencia de reducción del -31% observada hasta mayo de 2026. Estos valores son estimaciones sujetas a cambios.
+> **Nota sobre Proyecciones**: Los datos de la administración de Claudia Sheinbaum (2024-2030) están **proyectados** con base en la tendencia de reducción del -53% observada hasta agosto de 2026 (SESNSP). Estos valores son estimaciones sujetas a cambios.
 
 ---
 

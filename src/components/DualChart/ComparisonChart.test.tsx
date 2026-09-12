@@ -64,7 +64,7 @@ describe('ComparisonChart', () => {
     expect(screen.getByText('Real:')).toBeInTheDocument();
     expect(screen.getByText('¿Y si?:')).toBeInTheDocument();
     // HISTORICO_REAL final value (fixed real data, unaffected by the simulated result)
-    expect(screen.getByText('20.5 mil')).toBeInTheDocument();
+    expect(screen.getByText('14.0 mil')).toBeInTheDocument();
     // resultadoSimulacion.valorFinal formatted
     expect(screen.getByText('15 mil')).toBeInTheDocument();
 
