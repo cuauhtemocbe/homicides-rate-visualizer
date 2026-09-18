@@ -83,6 +83,7 @@ _*Datos proyectados con base en tendencia observada hasta agosto 2026_
 
 - [Node.js](https://nodejs.org/) 18+ o [Bun](https://bun.sh/)
 - [pnpm](https://pnpm.io/) (recomendado) o npm
+- [Trivy](https://trivy.dev/): el hook `pre-push` (Husky) corre primero un escaneo Trivy fail-closed en cada push y aborta si `trivy` no está instalado; ver `.claude/skills/trivy-scan/setup.md`
 
 ### Instalación
 
