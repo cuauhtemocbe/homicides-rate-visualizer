@@ -92,6 +92,42 @@ jobs:
           scanners: vuln,secret,misconfig
           exit-code: "1"
           severity: CRITICAL,HIGH
+          ignore-unfixed: true
+
+  # Image CVE scan + Dockerfile misconfig scan (meta-projects#56). trivy-fs
+  # only reads pnpm-lock.yaml; it cannot see base-image OS packages.
+  # Job ids double as check names on purpose (no `name:`).
+  trivy-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # Production stage of the Dockerfile (last stage). Never pushed.
+      - name: Build production image
+        run: docker build -t homicides-rate-visualizer:scan .
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: homicides-rate-visualizer:scan
+          scanners: vuln
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+  trivy-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Trivy Dockerfile misconfig scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: config
+          scan-ref: .
+          # Dockerfile.dev is local-only tooling, not a production image.
+          skip-files: Dockerfile.dev
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
 
   build:
     name: Build
