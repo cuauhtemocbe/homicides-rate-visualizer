@@ -1,5 +1,5 @@
 # ---------- Builder ----------
-FROM node:26-alpine@sha256:0b36e8c136b94cd4fcf02188228e76c31ad5872eef3fec8cbd2eee500cfd9e80 AS builder
+FROM node:26.13.0-alpine3.24@sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216 AS builder
 
 RUN apk add --no-cache git
 ENV PNPM_HOME="/root/.local/share/pnpm"
@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm run typecheck && pnpm run build
 
 # ---------- Production ----------
-FROM node:26-alpine@sha256:0b36e8c136b94cd4fcf02188228e76c31ad5872eef3fec8cbd2eee500cfd9e80 AS production
+FROM node:26.13.0-alpine3.24@sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216 AS production
 
 # apk upgrade pulls Alpine security fixes published after the pinned base digest
 # (e.g. openssl CVE-2026-14456 fixed in 3.5.8-r0); trivy-image gates on these
